@@ -129,6 +129,12 @@
     <Compile Include="TransferGroup.Designer.cs">
       <DependentUpon>TransferGroup.cs</DependentUpon>
     </Compile>
+    <Compile Include="TransferVUZ.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TransferVUZ.Designer.cs">
+      <DependentUpon>TransferVUZ.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="AboutWindow.resx">
       <DependentUpon>AboutWindow.cs</DependentUpon>
     </EmbeddedResource>
@@ -174,6 +180,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TransferGroup.resx">
       <DependentUpon>TransferGroup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TransferVUZ.resx">
+      <DependentUpon>TransferVUZ.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

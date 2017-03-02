@@ -16,9 +16,9 @@ namespace Contingent_RISE
         string Idperson;
         string Idprofiles;
         string Iddoc;
-        string coursee, Idstatus;
+        string coursee, Idstatus, Idgroup;
 
-        public DeleteStudents(string FIO, string group, string Id_person, string Id_profiles, string Id_doc, string Course, string Id_status)
+        public DeleteStudents(string FIO, string group, string Id_person, string Id_profiles, string Id_doc, string Course, string Id_group)
         {
             InitializeComponent();
             mlFIO.Text += FIO;
@@ -27,7 +27,7 @@ namespace Contingent_RISE
             Idprofiles = Id_profiles;
             Iddoc = Id_doc;
             coursee = Course;
-            Idstatus = Id_status;
+            Idgroup = Id_group;
         }
 
         private void DeleteStudents_Load(object sender, EventArgs e)
@@ -47,6 +47,8 @@ namespace Contingent_RISE
             string strb = String.Format("{0: yyyy-MM-dd}", mdtB.Value);
             string strs = String.Format("{0: yyyy-MM-dd}", mdtSign.Value);
 
+            Data.CreateCommand("INSERT INTO document(name, typeDocument, number, dateDocument, dateStart, scan, \"description\") VALUES ('Приказ №" + mtbNumber.Text + " от " + mdtB.Text + "','Приказ', '" + mtbNumber.Text + "','" + strs + "','" + strb + "','" + mlScan.Text + "','" + mtbDescription.Text + "')");
+            Data.CreateCommand("INSERT INTO student(Id_person, Id_document, Id_group, course, Id_statusStudent, Id_profiles) VALUES ('" + Idperson + "',(SELECT MAX(Id) FROM document),'" + Idgroup + "','" + coursee + "','1','" + Idprofiles + "')");
             Close();
         }
 

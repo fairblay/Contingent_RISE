@@ -598,6 +598,7 @@
             this.mbTransferVUZ.TabIndex = 9;
             this.mbTransferVUZ.Text = "Перевод в ВУЗ";
             this.mbTransferVUZ.UseSelectable = true;
+            this.mbTransferVUZ.Click += new System.EventHandler(this.mbTransferVUZ_Click);
             // 
             // mbTransferGroup
             // 

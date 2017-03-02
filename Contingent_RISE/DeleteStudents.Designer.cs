@@ -33,13 +33,13 @@
             this.metroLabel1 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
-            this.mlScanName = new MetroFramework.Controls.MetroLabel();
+            this.mlScan = new MetroFramework.Controls.MetroLabel();
             this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
             this.mdtB = new MetroFramework.Controls.MetroDateTime();
             this.mdtSign = new MetroFramework.Controls.MetroDateTime();
             this.mbOpen = new MetroFramework.Controls.MetroButton();
             this.mtbNumber = new MetroFramework.Controls.MetroTextBox();
-            this.metroLabel6 = new MetroFramework.Controls.MetroLabel();
+            this.mlScanName = new MetroFramework.Controls.MetroLabel();
             this.mtbDescription = new MetroFramework.Controls.MetroTextBox();
             this.mbAccept = new MetroFramework.Controls.MetroButton();
             this.mbCancel = new MetroFramework.Controls.MetroButton();
@@ -91,14 +91,14 @@
             this.metroLabel3.TabIndex = 4;
             this.metroLabel3.Text = "Дата вступления:";
             // 
-            // mlScanName
+            // mlScan
             // 
-            this.mlScanName.AutoSize = true;
-            this.mlScanName.Location = new System.Drawing.Point(35, 267);
-            this.mlScanName.Name = "mlScanName";
-            this.mlScanName.Size = new System.Drawing.Size(42, 19);
-            this.mlScanName.TabIndex = 5;
-            this.mlScanName.Text = "Скан:";
+            this.mlScan.AutoSize = true;
+            this.mlScan.Location = new System.Drawing.Point(35, 267);
+            this.mlScan.Name = "mlScan";
+            this.mlScan.Size = new System.Drawing.Size(42, 19);
+            this.mlScan.TabIndex = 5;
+            this.mlScan.Text = "Скан:";
             // 
             // metroLabel5
             // 
@@ -164,14 +164,14 @@
             this.mtbNumber.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.mtbNumber.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
-            // metroLabel6
+            // mlScanName
             // 
-            this.metroLabel6.AutoSize = true;
-            this.metroLabel6.Location = new System.Drawing.Point(273, 271);
-            this.metroLabel6.Name = "metroLabel6";
-            this.metroLabel6.Size = new System.Drawing.Size(104, 19);
-            this.metroLabel6.TabIndex = 11;
-            this.metroLabel6.Text = "Выберите файл";
+            this.mlScanName.AutoSize = true;
+            this.mlScanName.Location = new System.Drawing.Point(273, 271);
+            this.mlScanName.Name = "mlScanName";
+            this.mlScanName.Size = new System.Drawing.Size(104, 19);
+            this.mlScanName.TabIndex = 11;
+            this.mlScanName.Text = "Выберите файл";
             // 
             // mtbDescription
             // 
@@ -225,7 +225,6 @@
             // 
             // openFileDialog1
             // 
-            this.openFileDialog1.FileName = "openFileDialog1";
             this.openFileDialog1.Filter = "PDF|*.pdf|JPG|*.jpg|Все файлы|*.*";
             // 
             // DeleteStudents
@@ -236,13 +235,13 @@
             this.Controls.Add(this.mbCancel);
             this.Controls.Add(this.mbAccept);
             this.Controls.Add(this.mtbDescription);
-            this.Controls.Add(this.metroLabel6);
+            this.Controls.Add(this.mlScanName);
             this.Controls.Add(this.mtbNumber);
             this.Controls.Add(this.mbOpen);
             this.Controls.Add(this.mdtSign);
             this.Controls.Add(this.mdtB);
             this.Controls.Add(this.metroLabel5);
-            this.Controls.Add(this.mlScanName);
+            this.Controls.Add(this.mlScan);
             this.Controls.Add(this.metroLabel3);
             this.Controls.Add(this.metroLabel2);
             this.Controls.Add(this.metroLabel1);
@@ -266,13 +265,13 @@
         private MetroFramework.Controls.MetroLabel metroLabel1;
         private MetroFramework.Controls.MetroLabel metroLabel2;
         private MetroFramework.Controls.MetroLabel metroLabel3;
-        private MetroFramework.Controls.MetroLabel mlScanName;
+        private MetroFramework.Controls.MetroLabel mlScan;
         private MetroFramework.Controls.MetroLabel metroLabel5;
         private MetroFramework.Controls.MetroDateTime mdtB;
         private MetroFramework.Controls.MetroDateTime mdtSign;
         private MetroFramework.Controls.MetroButton mbOpen;
         private MetroFramework.Controls.MetroTextBox mtbNumber;
-        private MetroFramework.Controls.MetroLabel metroLabel6;
+        private MetroFramework.Controls.MetroLabel mlScanName;
         private MetroFramework.Controls.MetroTextBox mtbDescription;
         private MetroFramework.Controls.MetroButton mbAccept;
         private MetroFramework.Controls.MetroButton mbCancel;
