@@ -66,6 +66,7 @@
             this.PanelDictionary = new MetroFramework.Controls.MetroPanel();
             this.metroTabControlStudent = new MetroFramework.Controls.MetroTabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.LabelAvarage = new MetroFramework.Controls.MetroLabel();
             this.LabelPasport = new MetroFramework.Controls.MetroLabel();
             this.LabelINN = new MetroFramework.Controls.MetroLabel();
@@ -76,6 +77,7 @@
             this.FIOlabel = new MetroFramework.Controls.MetroLabel();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.mPanelForTransfer = new MetroFramework.Controls.MetroPanel();
+            this.mbRename = new MetroFramework.Controls.MetroButton();
             this.mbDeleteStudent = new MetroFramework.Controls.MetroButton();
             this.metroLabelFIO = new MetroFramework.Controls.MetroLabel();
             this.mbAcademicOtpysk = new MetroFramework.Controls.MetroButton();
@@ -89,8 +91,6 @@
             this.PanelStudent = new MetroFramework.Controls.MetroPanel();
             this.metroPanelFind = new MetroFramework.Controls.MetroPanel();
             this.metroTextBoxFind = new MetroFramework.Controls.MetroTextBox();
-            this.mbRename = new MetroFramework.Controls.MetroButton();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
             this.metroPanel2.SuspendLayout();
             this.metroPanel3.SuspendLayout();
@@ -99,6 +99,7 @@
             this.PanelDictionary.SuspendLayout();
             this.metroTabControlStudent.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.tabPage2.SuspendLayout();
             this.mPanelForTransfer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mgHistory)).BeginInit();
@@ -106,7 +107,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.metroGridStudent)).BeginInit();
             this.PanelStudent.SuspendLayout();
             this.metroPanelFind.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -443,6 +443,15 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = " Общая информация";
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Location = new System.Drawing.Point(0, 0);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(185, 180);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 24;
+            this.pictureBox2.TabStop = false;
+            // 
             // LabelAvarage
             // 
             this.LabelAvarage.AutoSize = true;
@@ -543,6 +552,15 @@
             this.mPanelForTransfer.VerticalScrollbarHighlightOnWheel = false;
             this.mPanelForTransfer.VerticalScrollbarSize = 10;
             // 
+            // mbRename
+            // 
+            this.mbRename.Location = new System.Drawing.Point(602, 6);
+            this.mbRename.Name = "mbRename";
+            this.mbRename.Size = new System.Drawing.Size(75, 23);
+            this.mbRename.TabIndex = 13;
+            this.mbRename.Text = "Смена ФИО";
+            this.mbRename.UseSelectable = true;
+            // 
             // mbDeleteStudent
             // 
             this.mbDeleteStudent.Location = new System.Drawing.Point(521, 6);
@@ -551,6 +569,7 @@
             this.mbDeleteStudent.TabIndex = 12;
             this.mbDeleteStudent.Text = "Отчисление";
             this.mbDeleteStudent.UseSelectable = true;
+            this.mbDeleteStudent.Click += new System.EventHandler(this.mbDeleteStudent_Click);
             // 
             // metroLabelFIO
             // 
@@ -805,24 +824,6 @@
             this.metroTextBoxFind.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.metroTextBoxFind.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
             // 
-            // mbRename
-            // 
-            this.mbRename.Location = new System.Drawing.Point(602, 6);
-            this.mbRename.Name = "mbRename";
-            this.mbRename.Size = new System.Drawing.Size(75, 23);
-            this.mbRename.TabIndex = 13;
-            this.mbRename.Text = "Смена ФИО";
-            this.mbRename.UseSelectable = true;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Location = new System.Drawing.Point(0, 0);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(185, 180);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 24;
-            this.pictureBox2.TabStop = false;
-            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -848,6 +849,7 @@
             this.metroTabControlStudent.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.mPanelForTransfer.ResumeLayout(false);
             this.mPanelForTransfer.PerformLayout();
@@ -856,7 +858,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.metroGridStudent)).EndInit();
             this.PanelStudent.ResumeLayout(false);
             this.metroPanelFind.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

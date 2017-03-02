@@ -18,8 +18,9 @@ namespace Contingent_RISE
         string Idperson;
         string Idprofiles;
         string Iddoc;
+        string coursee, Idstatus;
 
-        public TransferGroup(string FIO, string group, string Id_person, string Id_profiles, string Id_doc)
+        public TransferGroup(string FIO, string group, string Id_person, string Id_profiles, string Id_doc, string Course, string Id_status)
         {
             InitializeComponent();
             mlFIO.Text +=FIO;
@@ -28,6 +29,8 @@ namespace Contingent_RISE
             Idperson = Id_person;
             Idprofiles = Id_profiles;
             Iddoc = Id_doc;
+            coursee = Course;
+            Idstatus = Id_status;
         }
 
         private void TransferGroup_Load(object sender, EventArgs e)
@@ -51,13 +54,12 @@ namespace Contingent_RISE
         {
             string strb = String.Format("{0: yyyy-MM-dd}", mdtB.Value);
             string strs = String.Format("{0: yyyy-MM-dd}", mdtSign.Value);
-            //Data.CreateCommand("INSERT INTO document(name, typeDocument, number, dateDocument, dateStart, scan, \"description\") VALUES ('Приказ №" + mtbNumDoc.Text + " от " + mdtB.Text + "','Приказ', '" + mtbNumDoc.Text + "','" + strs + "','" + strb + "','" + mlScanName.Text + "','" + mtbDescription.Text + "')");
-            // Data.CreateCommand("INSERT INTO student(Id_person, Id_document, Id_group, course, Id_statusStudent, Id_profiles) VALUES ('"+Idperson+ "')");  
+            Data.CreateCommand("INSERT INTO document(name, typeDocument, number, dateDocument, dateStart, scan, \"description\") VALUES ('Приказ №" + mtbNumDoc.Text + " от " + mdtB.Text + "','Приказ', '" + mtbNumDoc.Text + "','" + strs + "','" + strb + "','" + mlScanName.Text + "','" + mtbDescription.Text + "')");
+            Data.CreateCommand("INSERT INTO student(Id_person, Id_document, Id_group, course, Id_statusStudent, Id_profiles) VALUES ('" + Idperson + "',(SELECT MAX(Id) FROM document),'" + mcbGroup.SelectedValue + "','" +coursee + "','" + Idstatus + "','"+Idprofiles +"')");
 
             //MessageBox.Show("INSERT INTO document(name, typeDocument, number, dateDocument, dateStart, scan, \"description\") VALUES ('Приказ №" + mtbNumDoc.Text + " от " + mdtB.Text + "','Приказ', '" + mtbNumDoc.Text + "','" + strs + "','" + strb + "','" + mlScanName.Text + "','" + mtbDescription.Text + "')");
-            MessageBox.Show("INSERT INTO student(Id_person, Id_document, Id_group, course, Id_statusStudent, Id_profiles) VALUES ('" + Idperson + "','" + Iddoc + "')");
+            //MessageBox.Show("INSERT INTO student(Id_person, Id_document, Id_group, course, Id_statusStudent, Id_profiles) VALUES ('" + Idperson + "',(SELECT MAX(Id) FROM document),'" + mcbGroup.SelectedValue  + "','" +coursee + "','" + Idstatus + "','"+Idprofiles +"')");
 
-            //Дописать 2ой createcommand(С помощью запроса в mgHistory+скрыть). Чтобы вставить последний Id_document в табл. student. 
             Close();
         }
     }
