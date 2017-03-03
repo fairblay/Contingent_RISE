@@ -412,7 +412,7 @@ namespace Contingent_RISE
         {
             try
             {
-                TransferVUZ tv = new TransferVUZ(LabelFIO.Text, metroGridStudent[4, metroGridStudent.CurrentCell.RowIndex].Value.ToString(), mgHistory[4, metroGridStudent.CurrentCell.RowIndex].Value.ToString(), mgHistory[15, metroGridStudent.CurrentCell.RowIndex].Value.ToString(), mgHistory[16, metroGridStudent.CurrentCell.RowIndex].Value.ToString());
+                TransferVUZ tv = new TransferVUZ(LabelFIO.Text, metroGridStudent[4, metroGridStudent.CurrentCell.RowIndex].Value.ToString(), mgHistory[4, metroGridStudent.CurrentCell.RowIndex].Value.ToString(), mgHistory[15, metroGridStudent.CurrentCell.RowIndex].Value.ToString(), mgHistory[16, metroGridStudent.CurrentCell.RowIndex].Value.ToString(), metroGridStudent[0, metroGridStudent.CurrentCell.RowIndex].Value.ToString(), mgHistory[11, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[12, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[13, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[14, mgHistory.CurrentRow.Index].Value.ToString());
                 tv.ShowDialog();
                 historyStudent();
             }
