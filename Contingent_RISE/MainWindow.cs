@@ -330,7 +330,7 @@ namespace Contingent_RISE
             if (e.RowIndex+1 < d.RowCount)
              
             {
-                //MessageBox.Show(d.RowCount.ToString() + " " + e.RowIndex.ToString());
+               // MessageBox.Show(d.RowCount.ToString() + " " + e.RowIndex.ToString());
                 str = e.RowIndex.ToString();
                 personData(str);
             }
@@ -360,7 +360,7 @@ namespace Contingent_RISE
         {
             mgHistory.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             //  mgHistory.DataSource = Data.CreateDataAdapter("SELECT Person.Id, Person.FIO as ФИО, Person.INN as ИНН,student.course as Курс, \"group\".name as Группа, statusStudent.name as Статус, Person.photo FROM student INNER JOIN Person ON student.Id_person=Person.Id INNER JOIN \"group\" ON student.Id_group=\"group\".Id INNER JOIN statusStudent ON student.Id_statusStudent=statusStudent.Id");
-            mgHistory.DataSource = Data.CreateDataAdapter("SELECT Person.Id, student.Id,document.dateStart as 'Дата вступления документа', VUZ.name as ВУЗ, directionTraining.name as 'Направление в ВУЗе',qulifyLevel.name as 'Квалификационный уровень',\"form\".name as 'Форма обучения',profiles.name as 'Профиль', \"group\".name as Группа,student.course as Курс, statusStudent.name as 'Статус студента', profiles.Id as 'PRO', student.Id_document as 'Iddoc', student.Id_statusStudent as 'IdSS', student.Id_group as 'IdGR', directionTraining.code, VUZ.Id as 'IdVUZ' FROM student INNER JOIN Person ON student.Id_person=Person.Id INNER JOIN \"group\" ON student.Id_group=\"group\".Id INNER JOIN statusStudent ON student.Id_statusStudent=statusStudent.Id INNER JOIN document ON student.Id_document=document.Id INNER JOIN profiles ON student.Id_profiles=profiles.Id INNER JOIN direction ON profiles.Id_direction=direction.Id INNER JOIN VUZ ON direction.Id_VUZ=VUZ.Id INNER JOIN directionTraining ON directionTraining.Id=direction.Id_directionTraining INNER JOIN qulifyLevel ON profiles.Id_qulifyLevel=qulifyLevel.Id INNER JOIN \"form\" ON profiles.Id_form=\"form\".Id WHERE Person.Id = " + idStudent + "ORDER BY document.Id DESC");
+            mgHistory.DataSource = Data.CreateDataAdapter("SELECT Person.Id, student.Id,document.dateStart as 'Дата вступления документа', VUZ.name as ВУЗ, directionTraining.name as 'Направление в ВУЗе',qulifyLevel.name as 'Квалификационный уровень',\"form\".name as 'Форма обучения',profiles.name as 'Профиль', \"group\".name as Группа,student.course as Курс, statusStudent.name as 'Статус студента', profiles.Id as 'PRO', student.Id_document as 'Iddoc', student.Id_statusStudent as 'IdSS', student.Id_group as 'IdGR', directionTraining.code, VUZ.Id as 'IdVUZ', \"group\".Id_VUZ as 'IDV' FROM student INNER JOIN Person ON student.Id_person=Person.Id INNER JOIN \"group\" ON student.Id_group=\"group\".Id INNER JOIN statusStudent ON student.Id_statusStudent=statusStudent.Id INNER JOIN document ON student.Id_document=document.Id INNER JOIN profiles ON student.Id_profiles=profiles.Id INNER JOIN direction ON profiles.Id_direction=direction.Id INNER JOIN VUZ ON direction.Id_VUZ=VUZ.Id INNER JOIN directionTraining ON directionTraining.Id=direction.Id_directionTraining INNER JOIN qulifyLevel ON profiles.Id_qulifyLevel=qulifyLevel.Id INNER JOIN \"form\" ON profiles.Id_form=\"form\".Id WHERE Person.Id = " + idStudent + "ORDER BY document.Id DESC");
             mgHistory.Columns[0].Visible = false;
             mgHistory.Columns[1].Visible = false;
             mgHistory.Columns[11].Visible = false;
@@ -369,12 +369,23 @@ namespace Contingent_RISE
             mgHistory.Columns[14].Visible = false;
             mgHistory.Columns[15].Visible = false;
             mgHistory.Columns[16].Visible = false;
+            mgHistory.Columns[17].Visible = false;
         }
 
         private void mbTransferCourse_Click(object sender, EventArgs e)
         {
-            TransferCouse tc = new TransferCouse();
-            tc.ShowDialog();
+            try
+            {
+                TransferCouse tc = new TransferCouse();
+                tc.ShowDialog();
+                historyStudent();
+                metroGridStudent.DataSource = Data.CreateDataAdapter("SELECT t1.Id, t1.FIO as ФИО, t1.INN as ИНН, t1.course as Курс,t1.namegroup as Группа, t1.name as Статус, t1.Photo, t2.da as 'Дата документа' FROM (SELECT Person.Id, Person.FIO, Person.INN, student.course, \"group\".name as namegroup, statusStudent.name, Person.AvarageScore, Person.Pasport, Person.Photo, document.scan, document.dateStart, student.Id as idstud FROM Person INNER JOIN student ON student.Id_person = Person.Id INNER JOIN document ON document.Id = student.Id_document INNER JOIN \"group\" ON \"group\".Id = student.Id_group INNER JOIN statusStudent ON statusStudent.Id = student.Id_statusStudent) t1 RIGHT JOIN (SELECT student.Id_person, MAX(document.dateStart) as da FROM student INNER JOIN document ON document.Id = student.Id_document GROUP BY student.Id_person) t2 ON t1.Id = t2.Id_person AND t1.dateStart = t2.da");
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error");
+            }
         }
 
         private void mbTransferGroup_Click(object sender, EventArgs e)
@@ -382,9 +393,10 @@ namespace Contingent_RISE
             
             try
             {
-                TransferGroup tg = new TransferGroup(LabelFIO.Text, metroGridStudent[4, metroGridStudent.CurrentCell.RowIndex].Value.ToString(), metroGridStudent[0,metroGridStudent.CurrentCell.RowIndex].Value.ToString(), mgHistory[11, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[12, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[13, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[9, mgHistory.CurrentRow.Index].Value.ToString());
+                TransferGroup tg = new TransferGroup(LabelFIO.Text, metroGridStudent[4, metroGridStudent.CurrentCell.RowIndex].Value.ToString(), metroGridStudent[0,metroGridStudent.CurrentCell.RowIndex].Value.ToString(), mgHistory[11, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[12, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[13, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[9, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[17, mgHistory.CurrentRow.Index].Value.ToString());
                 tg.ShowDialog();
                 historyStudent();
+
             }
             catch (Exception ex)
             {
@@ -412,13 +424,32 @@ namespace Contingent_RISE
         {
             try
             {
-                TransferVUZ tv = new TransferVUZ(LabelFIO.Text, metroGridStudent[4, metroGridStudent.CurrentCell.RowIndex].Value.ToString(), mgHistory[4, metroGridStudent.CurrentCell.RowIndex].Value.ToString(), mgHistory[15, metroGridStudent.CurrentCell.RowIndex].Value.ToString(), mgHistory[16, metroGridStudent.CurrentCell.RowIndex].Value.ToString(), metroGridStudent[0, metroGridStudent.CurrentCell.RowIndex].Value.ToString(), mgHistory[11, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[12, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[13, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[14, mgHistory.CurrentRow.Index].Value.ToString());
-                tv.ShowDialog();
-                historyStudent();
+              
+                using (TransferVUZ tv = new TransferVUZ(LabelFIO.Text, metroGridStudent[4, metroGridStudent.CurrentCell.RowIndex].Value.ToString(), mgHistory[4, mgHistory.CurrentCell.RowIndex].Value.ToString(), mgHistory[15, mgHistory.CurrentCell.RowIndex].Value.ToString(), mgHistory[16, mgHistory.CurrentCell.RowIndex].Value.ToString(), metroGridStudent[0, metroGridStudent.CurrentCell.RowIndex].Value.ToString(), mgHistory[11, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[12, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[9, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[14, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[17, mgHistory.CurrentRow.Index].Value.ToString()))
+                { tv.ShowDialog();
+                    historyStudent();
+                } 
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error");
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void mbAcademicOtpysk_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                using (Academ ac = new Academ(LabelFIO.Text, metroGridStudent[4, metroGridStudent.CurrentCell.RowIndex].Value.ToString(), metroGridStudent[0, metroGridStudent.CurrentCell.RowIndex].Value.ToString(), mgHistory[11, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[12, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[13, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[9, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[17, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[14, mgHistory.CurrentRow.Index].Value.ToString()))
+                {
+                    ac.ShowDialog();
+                    historyStudent();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
     }

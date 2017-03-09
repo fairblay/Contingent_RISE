@@ -589,6 +589,7 @@
             this.mbAcademicOtpysk.TabIndex = 10;
             this.mbAcademicOtpysk.Text = "Академический отпуск";
             this.mbAcademicOtpysk.UseSelectable = true;
+            this.mbAcademicOtpysk.Click += new System.EventHandler(this.mbAcademicOtpysk_Click);
             // 
             // mbTransferVUZ
             // 

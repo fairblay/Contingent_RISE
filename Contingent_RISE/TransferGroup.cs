@@ -18,19 +18,22 @@ namespace Contingent_RISE
         string Idperson;
         string Idprofiles;
         string Iddoc;
-        string coursee, Idstatus;
+        string coursee, Idstatus,IdVUZ;
 
-        public TransferGroup(string FIO, string group, string Id_person, string Id_profiles, string Id_doc, string Course, string Id_status)
+        public TransferGroup(string FIO, string group, string Id_person, string Id_profiles, string Id_doc, string Course, string Id_status, string Id_VUZ)
         {
             InitializeComponent();
             mlFIO.Text +=FIO;
             mlGroup.Text += group;
-            mcbGroup.DataSource = Data.CreateDataAdapter("SELECT Id, name FROM \"group\"");
+            
             Idperson = Id_person;
             Idprofiles = Id_profiles;
             Iddoc = Id_doc;
             coursee = Course;
             Idstatus = Id_status;
+            IdVUZ = Id_VUZ;
+            mcbGroup.DataSource = Data.CreateDataAdapter("SELECT Id, name FROM \"group\" WHERE Id_VUZ=" + IdVUZ);
+           //MessageBox.Show("SELECT Id, name FROM \"group\" WHERE Id_VUZ=" +IdVUZ);
         }
 
         private void TransferGroup_Load(object sender, EventArgs e)

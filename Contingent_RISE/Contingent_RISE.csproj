@@ -61,6 +61,12 @@
     <Compile Include="AboutWindow.Designer.cs">
       <DependentUpon>AboutWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="Academ.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Academ.Designer.cs">
+      <DependentUpon>Academ.cs</DependentUpon>
+    </Compile>
     <Compile Include="DeleteStudents.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -137,6 +143,9 @@
     </Compile>
     <EmbeddedResource Include="AboutWindow.resx">
       <DependentUpon>AboutWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Academ.resx">
+      <DependentUpon>Academ.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DeleteStudents.resx">
       <DependentUpon>DeleteStudents.cs</DependentUpon>
