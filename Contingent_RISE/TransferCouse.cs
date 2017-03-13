@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -40,7 +41,7 @@ namespace Contingent_RISE
 
         private void mcbVUZ_SelectedValueChanged(object sender, EventArgs e)
         {
-            mcbGroup.DataSource = Data.CreateDataAdapter("SELECT Id, name FROM \"group\" WHERE Id_VUZ=" + mcbVUZ.SelectedValue);
+            mcbGroup.DataSource = Data.CreateDataAdapter("SELECT Id, name FROM \"group\" WHERE course<>4 AND course<>6 AND Id_VUZ=" + mcbVUZ.SelectedValue);
         }
 
         private void mcbGroup_SelectedValueChanged(object sender, EventArgs e)
@@ -57,10 +58,25 @@ namespace Contingent_RISE
 
 
             Data.CreateCommand("INSERT INTO document(name, typeDocument, number, dateDocument, dateStart, scan, \"description\") VALUES ('Приказ №" + mtbNumDoc.Text + " от " + mdtB.Text + "','Приказ', '" + mtbNumDoc.Text + "','" + strs + "','" + strb + "','" + mlScanName.Text + "','" + mtbDescription.Text + "')");
-            Data.CreateCommand("UPDATE student SET course = (SELECT DISTINCT course FROM student WHERE Id_group=2)+1 WHERE Id_group="+mcbGroup.SelectedValue);
-        
+            
 
-            Close();
+
+           
+            Data.CreateCommand("UPDATE \"group\" SET course = course+1 WHERE Id=" + mcbGroup.SelectedValue);
+
+            using (SqlConnection con = new SqlConnection(Data.connection))
+            {
+                //ВЫБОРКА СПИСКА ГРУППЫ
+                SqlCommand comm = new SqlCommand("SELECT Id_person, MAX(Id_document) as last_doc FROM student WHERE Id_group="+ mcbGroup.SelectedValue +" GROUP BY Id_person", con);   
+                comm.Connection.Open();
+                SqlDataReader reader = comm.ExecuteReader();
+                while (reader.Read())
+                {
+                   Data.CreateCommand("INSERT INTO student VALUES ("+ reader[0].ToString()+",(SELECT MAX(Id) FROM document),"+mcbGroup.SelectedValue+", (SELECT course FROM \"group\" WHERE Id="+mcbGroup.SelectedValue+"), 2, (SELECT Id_profiles FROM \"group\" WHERE Id="+mcbGroup.SelectedValue+"))");
+                     //MessageBox.Show("INSERT INTO student VALUES ("+ reader[0].ToString()+",(SELECT MAX(Id) FROM document),"+mcbGroup.SelectedValue+", (SELECT course FROM \"group\" WHERE Id="+mcbGroup.SelectedValue+"), 2, (SELECT Id_profiles FROM \"group\" WHERE Id="+mcbGroup.SelectedValue+"))");
+                }
+                Close();
+            }
         }
 
         private void mbOpen_Click(object sender, EventArgs e)

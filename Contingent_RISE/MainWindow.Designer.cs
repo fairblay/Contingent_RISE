@@ -91,6 +91,8 @@
             this.PanelStudent = new MetroFramework.Controls.MetroPanel();
             this.metroPanelFind = new MetroFramework.Controls.MetroPanel();
             this.metroTextBoxFind = new MetroFramework.Controls.MetroTextBox();
+            this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
+            this.mbSearchForStudents = new MetroFramework.Controls.MetroButton();
             this.menuStrip1.SuspendLayout();
             this.metroPanel2.SuspendLayout();
             this.metroPanel3.SuspendLayout();
@@ -560,6 +562,7 @@
             this.mbRename.TabIndex = 13;
             this.mbRename.Text = "Смена ФИО";
             this.mbRename.UseSelectable = true;
+            this.mbRename.Click += new System.EventHandler(this.mbRename_Click_1);
             // 
             // mbDeleteStudent
             // 
@@ -782,6 +785,8 @@
             // 
             // metroPanelFind
             // 
+            this.metroPanelFind.Controls.Add(this.mbSearchForStudents);
+            this.metroPanelFind.Controls.Add(this.metroLabel3);
             this.metroPanelFind.Controls.Add(this.metroTextBoxFind);
             this.metroPanelFind.Dock = System.Windows.Forms.DockStyle.Top;
             this.metroPanelFind.HorizontalScrollbarBarColor = true;
@@ -809,9 +814,8 @@
             this.metroTextBoxFind.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.metroTextBoxFind.CustomButton.UseSelectable = true;
             this.metroTextBoxFind.CustomButton.Visible = false;
-            this.metroTextBoxFind.Lines = new string[] {
-        "Поиск..."};
-            this.metroTextBoxFind.Location = new System.Drawing.Point(15, 4);
+            this.metroTextBoxFind.Lines = new string[0];
+            this.metroTextBoxFind.Location = new System.Drawing.Point(66, 7);
             this.metroTextBoxFind.MaxLength = 32767;
             this.metroTextBoxFind.Name = "metroTextBoxFind";
             this.metroTextBoxFind.PasswordChar = '\0';
@@ -821,10 +825,28 @@
             this.metroTextBoxFind.SelectionStart = 0;
             this.metroTextBoxFind.Size = new System.Drawing.Size(188, 23);
             this.metroTextBoxFind.TabIndex = 2;
-            this.metroTextBoxFind.Text = "Поиск...";
             this.metroTextBoxFind.UseSelectable = true;
             this.metroTextBoxFind.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.metroTextBoxFind.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // metroLabel3
+            // 
+            this.metroLabel3.AutoSize = true;
+            this.metroLabel3.Location = new System.Drawing.Point(10, 8);
+            this.metroLabel3.Name = "metroLabel3";
+            this.metroLabel3.Size = new System.Drawing.Size(46, 19);
+            this.metroLabel3.TabIndex = 3;
+            this.metroLabel3.Text = "Поиск";
+            // 
+            // mbSearchForStudents
+            // 
+            this.mbSearchForStudents.Location = new System.Drawing.Point(263, 7);
+            this.mbSearchForStudents.Name = "mbSearchForStudents";
+            this.mbSearchForStudents.Size = new System.Drawing.Size(75, 23);
+            this.mbSearchForStudents.TabIndex = 4;
+            this.mbSearchForStudents.Text = "Найти";
+            this.mbSearchForStudents.UseSelectable = true;
+            this.mbSearchForStudents.Click += new System.EventHandler(this.mbSearchForStudents_Click);
             // 
             // MainWindow
             // 
@@ -860,6 +882,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.metroGridStudent)).EndInit();
             this.PanelStudent.ResumeLayout(false);
             this.metroPanelFind.ResumeLayout(false);
+            this.metroPanelFind.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -918,6 +941,8 @@
         private MetroFramework.Controls.MetroButton mbTransferCourse;
         private MetroFramework.Controls.MetroButton mbDeleteStudent;
         private MetroFramework.Controls.MetroButton mbRename;
+        private MetroFramework.Controls.MetroLabel metroLabel3;
+        private MetroFramework.Controls.MetroButton mbSearchForStudents;
     }
 }
 
