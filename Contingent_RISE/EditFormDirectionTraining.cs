@@ -15,11 +15,12 @@ namespace Contingent_RISE
     public partial class EditFormDirectionTraining : MetroForm
     {
         string oldid;
-        public EditFormDirectionTraining(string name, string id)
+        public EditFormDirectionTraining(string name, string id, string code)
         {
             InitializeComponent();
             mtbName.Text = name;
             oldid = id;
+            mtbCode.Text = code;
         }
         public EditFormDirectionTraining()
         {
@@ -37,12 +38,13 @@ namespace Contingent_RISE
         {
             if (mbEdit.Text == "Изменить")
             {
-                Data.CreateCommand("UPDATE directionTraining SET name='" + mtbName.Text + "' WHERE Id=" + oldid);
+                Data.CreateCommand("UPDATE directionTraining SET name='" + mtbName.Text + "', code='"+mtbCode.Text + "' WHERE Id=" + oldid);
+                //MessageBox.Show("UPDATE directionTraining SET name='" + mtbName.Text + "', code='" + mtbCode.Text + "' WHERE Id=" + oldid);
                 MetroMessageBox.Show(this, "Вы уверены?", "Изменение", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
             }
             else
             {
-                Data.CreateCommand("INSERT INTO directionTraining(name) VALUES ('" + mtbName.Text + "')");
+                Data.CreateCommand("INSERT INTO directionTraining(name, code) VALUES ('" + mtbName.Text + "','"+mtbCode.Text+"')");
 
             }
 

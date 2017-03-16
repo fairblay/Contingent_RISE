@@ -32,6 +32,8 @@
             this.mtbName = new MetroFramework.Controls.MetroTextBox();
             this.mbEdit = new MetroFramework.Controls.MetroButton();
             this.mbCancel = new MetroFramework.Controls.MetroButton();
+            this.metroLabel2 = new MetroFramework.Controls.MetroLabel();
+            this.mtbCode = new MetroFramework.Controls.MetroTextBox();
             this.SuspendLayout();
             // 
             // metroLabel1
@@ -39,9 +41,9 @@
             this.metroLabel1.AutoSize = true;
             this.metroLabel1.Location = new System.Drawing.Point(23, 101);
             this.metroLabel1.Name = "metroLabel1";
-            this.metroLabel1.Size = new System.Drawing.Size(102, 19);
+            this.metroLabel1.Size = new System.Drawing.Size(105, 19);
             this.metroLabel1.TabIndex = 0;
-            this.metroLabel1.Text = "Наименование";
+            this.metroLabel1.Text = "Наименование:";
             // 
             // mtbName
             // 
@@ -74,7 +76,7 @@
             // 
             // mbEdit
             // 
-            this.mbEdit.Location = new System.Drawing.Point(413, 222);
+            this.mbEdit.Location = new System.Drawing.Point(23, 222);
             this.mbEdit.Name = "mbEdit";
             this.mbEdit.Size = new System.Drawing.Size(75, 23);
             this.mbEdit.TabIndex = 2;
@@ -84,7 +86,7 @@
             // 
             // mbCancel
             // 
-            this.mbCancel.Location = new System.Drawing.Point(23, 222);
+            this.mbCancel.Location = new System.Drawing.Point(413, 222);
             this.mbCancel.Name = "mbCancel";
             this.mbCancel.Size = new System.Drawing.Size(75, 23);
             this.mbCancel.TabIndex = 3;
@@ -92,11 +94,51 @@
             this.mbCancel.UseSelectable = true;
             this.mbCancel.Click += new System.EventHandler(this.mbCancel_Click);
             // 
+            // metroLabel2
+            // 
+            this.metroLabel2.AutoSize = true;
+            this.metroLabel2.Location = new System.Drawing.Point(23, 146);
+            this.metroLabel2.Name = "metroLabel2";
+            this.metroLabel2.Size = new System.Drawing.Size(34, 19);
+            this.metroLabel2.TabIndex = 4;
+            this.metroLabel2.Text = "Код:";
+            // 
+            // mtbCode
+            // 
+            // 
+            // 
+            // 
+            this.mtbCode.CustomButton.Image = null;
+            this.mtbCode.CustomButton.Location = new System.Drawing.Point(320, 1);
+            this.mtbCode.CustomButton.Name = "";
+            this.mtbCode.CustomButton.Size = new System.Drawing.Size(21, 21);
+            this.mtbCode.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
+            this.mtbCode.CustomButton.TabIndex = 1;
+            this.mtbCode.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
+            this.mtbCode.CustomButton.UseSelectable = true;
+            this.mtbCode.CustomButton.Visible = false;
+            this.mtbCode.Lines = new string[0];
+            this.mtbCode.Location = new System.Drawing.Point(146, 146);
+            this.mtbCode.MaxLength = 32767;
+            this.mtbCode.Name = "mtbCode";
+            this.mtbCode.PasswordChar = '\0';
+            this.mtbCode.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.mtbCode.SelectedText = "";
+            this.mtbCode.SelectionLength = 0;
+            this.mtbCode.SelectionStart = 0;
+            this.mtbCode.Size = new System.Drawing.Size(342, 23);
+            this.mtbCode.TabIndex = 5;
+            this.mtbCode.UseSelectable = true;
+            this.mtbCode.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
+            this.mtbCode.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
             // EditFormDirectionTraining
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(511, 268);
+            this.Controls.Add(this.mtbCode);
+            this.Controls.Add(this.metroLabel2);
             this.Controls.Add(this.mbCancel);
             this.Controls.Add(this.mbEdit);
             this.Controls.Add(this.mtbName);
@@ -117,5 +159,7 @@
         private MetroFramework.Controls.MetroTextBox mtbName;
         private MetroFramework.Controls.MetroButton mbEdit;
         private MetroFramework.Controls.MetroButton mbCancel;
+        private MetroFramework.Controls.MetroLabel metroLabel2;
+        private MetroFramework.Controls.MetroTextBox mtbCode;
     }
 }

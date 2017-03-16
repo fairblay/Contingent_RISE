@@ -74,7 +74,7 @@
             // 
             // mbCancel
             // 
-            this.mbCancel.Location = new System.Drawing.Point(23, 198);
+            this.mbCancel.Location = new System.Drawing.Point(333, 198);
             this.mbCancel.Name = "mbCancel";
             this.mbCancel.Size = new System.Drawing.Size(75, 23);
             this.mbCancel.TabIndex = 2;
@@ -84,7 +84,7 @@
             // 
             // mbEdit
             // 
-            this.mbEdit.Location = new System.Drawing.Point(333, 198);
+            this.mbEdit.Location = new System.Drawing.Point(23, 198);
             this.mbEdit.Name = "mbEdit";
             this.mbEdit.Size = new System.Drawing.Size(75, 23);
             this.mbEdit.TabIndex = 3;

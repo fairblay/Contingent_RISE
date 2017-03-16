@@ -90,9 +90,9 @@
             this.metroGridStudent = new MetroFramework.Controls.MetroGrid();
             this.PanelStudent = new MetroFramework.Controls.MetroPanel();
             this.metroPanelFind = new MetroFramework.Controls.MetroPanel();
-            this.metroTextBoxFind = new MetroFramework.Controls.MetroTextBox();
-            this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
             this.mbSearchForStudents = new MetroFramework.Controls.MetroButton();
+            this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
+            this.metroTextBoxFind = new MetroFramework.Controls.MetroTextBox();
             this.menuStrip1.SuspendLayout();
             this.metroPanel2.SuspendLayout();
             this.metroPanel3.SuspendLayout();
@@ -136,7 +136,7 @@
             // выходToolStripMenuItem
             // 
             this.выходToolStripMenuItem.Name = "выходToolStripMenuItem";
-            this.выходToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
+            this.выходToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.выходToolStripMenuItem.Text = "Выход";
             this.выходToolStripMenuItem.Click += new System.EventHandler(this.выходToolStripMenuItem_Click);
             // 
@@ -800,6 +800,25 @@
             this.metroPanelFind.VerticalScrollbarHighlightOnWheel = false;
             this.metroPanelFind.VerticalScrollbarSize = 10;
             // 
+            // mbSearchForStudents
+            // 
+            this.mbSearchForStudents.Location = new System.Drawing.Point(263, 7);
+            this.mbSearchForStudents.Name = "mbSearchForStudents";
+            this.mbSearchForStudents.Size = new System.Drawing.Size(75, 23);
+            this.mbSearchForStudents.TabIndex = 4;
+            this.mbSearchForStudents.Text = "Найти";
+            this.mbSearchForStudents.UseSelectable = true;
+            this.mbSearchForStudents.Click += new System.EventHandler(this.mbSearchForStudents_Click);
+            // 
+            // metroLabel3
+            // 
+            this.metroLabel3.AutoSize = true;
+            this.metroLabel3.Location = new System.Drawing.Point(10, 8);
+            this.metroLabel3.Name = "metroLabel3";
+            this.metroLabel3.Size = new System.Drawing.Size(46, 19);
+            this.metroLabel3.TabIndex = 3;
+            this.metroLabel3.Text = "Поиск";
+            // 
             // metroTextBoxFind
             // 
             // 
@@ -828,25 +847,6 @@
             this.metroTextBoxFind.UseSelectable = true;
             this.metroTextBoxFind.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.metroTextBoxFind.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
-            // 
-            // metroLabel3
-            // 
-            this.metroLabel3.AutoSize = true;
-            this.metroLabel3.Location = new System.Drawing.Point(10, 8);
-            this.metroLabel3.Name = "metroLabel3";
-            this.metroLabel3.Size = new System.Drawing.Size(46, 19);
-            this.metroLabel3.TabIndex = 3;
-            this.metroLabel3.Text = "Поиск";
-            // 
-            // mbSearchForStudents
-            // 
-            this.mbSearchForStudents.Location = new System.Drawing.Point(263, 7);
-            this.mbSearchForStudents.Name = "mbSearchForStudents";
-            this.mbSearchForStudents.Size = new System.Drawing.Size(75, 23);
-            this.mbSearchForStudents.TabIndex = 4;
-            this.mbSearchForStudents.Text = "Найти";
-            this.mbSearchForStudents.UseSelectable = true;
-            this.mbSearchForStudents.Click += new System.EventHandler(this.mbSearchForStudents_Click);
             // 
             // MainWindow
             // 

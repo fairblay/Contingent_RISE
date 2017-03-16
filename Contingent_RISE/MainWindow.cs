@@ -107,7 +107,7 @@ namespace Contingent_RISE
                     updateDataGrid("SELECT Id, name as 'Название' FROM qulifyLevel");
                     break;
                 case 3:
-                    updateDataGrid("SELECT Id, name as 'Название' FROM directionTraining");
+                    updateDataGrid("SELECT Id, name as 'Название', code as 'Код' FROM directionTraining");
                     break;
                 case 4:
                     updateDataGrid("SELECT Id, name as 'Название' FROM form");
@@ -137,7 +137,7 @@ namespace Contingent_RISE
                 case 3:
                     EditFormDirectionTraining efdt = new EditFormDirectionTraining();
                     efdt.ShowDialog();
-                    updateDataGrid("SELECT Id, name as 'Название' FROM directionTraining");
+                    updateDataGrid("SELECT Id, name as 'Название', code as 'Код' FROM directionTraining");
                     break;
                 case 4:
                     EditFormForm eff = new EditFormForm();
@@ -171,7 +171,7 @@ namespace Contingent_RISE
                             break;
                         case 3:
                             Data.CreateCommand("DELETE FROM directionTraining WHERE Id=" + row.Cells["id"].Value.ToString());
-                            updateDataGrid("SELECT Id, name as 'Название' FROM directionTraining");
+                            updateDataGrid("SELECT Id, name as 'Название', code as 'Код' FROM directionTraining");
                             break;
                         case 4:
                             Data.CreateCommand("DELETE FROM form WHERE Id=" + row.Cells["id"].Value.ToString());
@@ -212,9 +212,9 @@ namespace Contingent_RISE
                     updateDataGrid("SELECT Id, name as 'Название' FROM qulifyLevel");
                     break;
                 case 3:
-                    EditFormDirectionTraining efdt = new EditFormDirectionTraining("" + row.Cells[1].Value, "" + row.Cells[0].Value);
+                    EditFormDirectionTraining efdt = new EditFormDirectionTraining("" + row.Cells[1].Value, "" + row.Cells[0].Value, "" + row.Cells[2].Value);
                     efdt.ShowDialog();
-                    updateDataGrid("SELECT Id, name as 'Название' FROM directionTraining");
+                    updateDataGrid("SELECT Id, name as 'Название', code as 'Код' FROM directionTraining");
                     break;
                 case 4:
                     EditFormForm eff = new EditFormForm("" + row.Cells[1].Value, "" + row.Cells[0].Value);
