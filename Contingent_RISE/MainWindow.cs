@@ -152,7 +152,7 @@ namespace Contingent_RISE
         {
             try
             {
-                if (MetroMessageBox.Show(this,"Вы уверены?", "Удаление", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+                if (MetroMessageBox.Show(this,"Вы уверены?", "Удалить данные", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
                 {
                     DataGridViewRow row = metroGrid1.Rows[selectedIndex];
                     switch (metroTabControl1.SelectedIndex)
@@ -263,6 +263,7 @@ namespace Contingent_RISE
             metroGridStudent.DataSource = Data.CreateDataAdapter("SELECT t1.Id, t1.FIO as ФИО, t1.INN as ИНН, t1.course as Курс,t1.namegroup as Группа, t1.name as Статус, t1.Photo, t2.da as 'Дата документа' FROM (SELECT Person.Id, Person.FIO, Person.INN, student.course, \"group\".name as namegroup, statusStudent.name, Person.AvarageScore, Person.Pasport, Person.Photo, document.scan, document.dateStart, student.Id as idstud FROM Person INNER JOIN student ON student.Id_person = Person.Id INNER JOIN document ON document.Id = student.Id_document INNER JOIN \"group\" ON \"group\".Id = student.Id_group INNER JOIN statusStudent ON statusStudent.Id = student.Id_statusStudent) t1 RIGHT JOIN (SELECT student.Id_person, MAX(document.dateStart) as da FROM student INNER JOIN document ON document.Id = student.Id_document GROUP BY student.Id_person) t2 ON t1.Id = t2.Id_person AND t1.dateStart = t2.da");
             metroGridStudent.Focus();
             metroGridStudent.ReadOnly = true;
+            mgHistory.ReadOnly = true;
             //mbOutsideTr.Visible = false;
             //mbInsideTr.Visible = false;
             
@@ -373,110 +374,7 @@ namespace Contingent_RISE
             mgHistory.Columns[17].Visible = false;
         }
 
-        private void mbTransferCourse_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                TransferCouse tc = new TransferCouse();
-                tc.ShowDialog();
-                historyStudent();
-                metroGridStudent.DataSource = Data.CreateDataAdapter("SELECT t1.Id, t1.FIO as ФИО, t1.INN as ИНН, t1.course as Курс,t1.namegroup as Группа, t1.name as Статус, t1.Photo, t2.da as 'Дата документа' FROM (SELECT Person.Id, Person.FIO, Person.INN, student.course, \"group\".name as namegroup, statusStudent.name, Person.AvarageScore, Person.Pasport, Person.Photo, document.scan, document.dateStart, student.Id as idstud FROM Person INNER JOIN student ON student.Id_person = Person.Id INNER JOIN document ON document.Id = student.Id_document INNER JOIN \"group\" ON \"group\".Id = student.Id_group INNER JOIN statusStudent ON statusStudent.Id = student.Id_statusStudent) t1 RIGHT JOIN (SELECT student.Id_person, MAX(document.dateStart) as da FROM student INNER JOIN document ON document.Id = student.Id_document GROUP BY student.Id_person) t2 ON t1.Id = t2.Id_person AND t1.dateStart = t2.da");
 
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void mbTransferGroup_Click(object sender, EventArgs e)
-        {
-            
-            try
-            {
-                TransferGroup tg = new TransferGroup(LabelFIO.Text, metroGridStudent[4, metroGridStudent.CurrentCell.RowIndex].Value.ToString(), metroGridStudent[0,metroGridStudent.CurrentCell.RowIndex].Value.ToString(), mgHistory[11, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[12, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[13, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[9, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[17, mgHistory.CurrentRow.Index].Value.ToString());
-                tg.ShowDialog();
-                historyStudent();
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error");
-            }
-           
-            
-        }
-
-        private void mbDeleteStudent_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                DeleteStudents ds  = new DeleteStudents(LabelFIO.Text, metroGridStudent[4, metroGridStudent.CurrentCell.RowIndex].Value.ToString(), metroGridStudent[0, metroGridStudent.CurrentCell.RowIndex].Value.ToString(), mgHistory[11, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[12, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[9, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[14, mgHistory.CurrentRow.Index].Value.ToString());
-                ds.ShowDialog();
-                historyStudent();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error");
-            }
-        }
-
-        private void mbTransferVUZ_Click(object sender, EventArgs e)
-        {
-            try
-            {
-              
-                using (TransferVUZ tv = new TransferVUZ(LabelFIO.Text, metroGridStudent[4, metroGridStudent.CurrentCell.RowIndex].Value.ToString(), mgHistory[4, mgHistory.CurrentCell.RowIndex].Value.ToString(), mgHistory[15, mgHistory.CurrentCell.RowIndex].Value.ToString(), mgHistory[16, mgHistory.CurrentCell.RowIndex].Value.ToString(), metroGridStudent[0, metroGridStudent.CurrentCell.RowIndex].Value.ToString(), mgHistory[11, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[12, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[9, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[14, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[17, mgHistory.CurrentRow.Index].Value.ToString()))
-                { tv.ShowDialog();
-                    historyStudent();
-                } 
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void mbAcademicOtpysk_Click(object sender, EventArgs e)
-        {
-            try
-            {
-
-                using (Academ ac = new Academ(LabelFIO.Text, metroGridStudent[4, metroGridStudent.CurrentCell.RowIndex].Value.ToString(), metroGridStudent[0, metroGridStudent.CurrentCell.RowIndex].Value.ToString(), mgHistory[11, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[12, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[13, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[9, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[17, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[14, mgHistory.CurrentRow.Index].Value.ToString()))
-                {
-                    ac.ShowDialog();
-                    historyStudent();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void mbRename_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void mbRename_Click_1(object sender, EventArgs e)
-        {
-            try
-            {
-
-                using (Rename rn = new Rename(LabelFIO.Text, metroGridStudent[4, metroGridStudent.CurrentCell.RowIndex].Value.ToString(), metroGridStudent[0, metroGridStudent.CurrentCell.RowIndex].Value.ToString(), mgHistory[11, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[12, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[9, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[14, mgHistory.CurrentRow.Index].Value.ToString()))
-                {
-                    rn.ShowDialog();
-                    historyStudent();
-                    metroGridStudent.DataSource = Data.CreateDataAdapter("SELECT t1.Id, t1.FIO as ФИО, t1.INN as ИНН, t1.course as Курс,t1.namegroup as Группа, t1.name as Статус, t1.Photo, t2.da as 'Дата документа' FROM (SELECT Person.Id, Person.FIO, Person.INN, student.course, \"group\".name as namegroup, statusStudent.name, Person.AvarageScore, Person.Pasport, Person.Photo, document.scan, document.dateStart, student.Id as idstud FROM Person INNER JOIN student ON student.Id_person = Person.Id INNER JOIN document ON document.Id = student.Id_document INNER JOIN \"group\" ON \"group\".Id = student.Id_group INNER JOIN statusStudent ON statusStudent.Id = student.Id_statusStudent) t1 RIGHT JOIN (SELECT student.Id_person, MAX(document.dateStart) as da FROM student INNER JOIN document ON document.Id = student.Id_document GROUP BY student.Id_person) t2 ON t1.Id = t2.Id_person AND t1.dateStart = t2.da");
-
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
 
         private void mbSearchForStudents_Click(object sender, EventArgs e)
         {
@@ -498,6 +396,115 @@ namespace Contingent_RISE
             }
         }
 
+        private void пЕСToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                TransferCouse tc = new TransferCouse();
+                tc.ShowDialog();
+                historyStudent();
+                metroGridStudent.DataSource = Data.CreateDataAdapter("SELECT t1.Id, t1.FIO as ФИО, t1.INN as ИНН, t1.course as Курс,t1.namegroup as Группа, t1.name as Статус, t1.Photo, t2.da as 'Дата документа' FROM (SELECT Person.Id, Person.FIO, Person.INN, student.course, \"group\".name as namegroup, statusStudent.name, Person.AvarageScore, Person.Pasport, Person.Photo, document.scan, document.dateStart, student.Id as idstud FROM Person INNER JOIN student ON student.Id_person = Person.Id INNER JOIN document ON document.Id = student.Id_document INNER JOIN \"group\" ON \"group\".Id = student.Id_group INNER JOIN statusStudent ON statusStudent.Id = student.Id_statusStudent) t1 RIGHT JOIN (SELECT student.Id_person, MAX(document.dateStart) as da FROM student INNER JOIN document ON document.Id = student.Id_document GROUP BY student.Id_person) t2 ON t1.Id = t2.Id_person AND t1.dateStart = t2.da");
 
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void преводВГруппуToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                TransferGroup tg = new TransferGroup(LabelFIO.Text, metroGridStudent[4, metroGridStudent.CurrentCell.RowIndex].Value.ToString(), metroGridStudent[0, metroGridStudent.CurrentCell.RowIndex].Value.ToString(), mgHistory[11, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[12, mgHistory.CurrentRow.Index].Value.ToString(), metroGridStudent[3, metroGridStudent.CurrentCell.RowIndex].Value.ToString(), mgHistory[9, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[17, mgHistory.CurrentRow.Index].Value.ToString());
+                tg.ShowDialog();
+                historyStudent();
+                metroGridStudent.DataSource = Data.CreateDataAdapter("SELECT t1.Id, t1.FIO as ФИО, t1.INN as ИНН, t1.course as Курс,t1.namegroup as Группа, t1.name as Статус, t1.Photo, t2.da as 'Дата документа' FROM (SELECT Person.Id, Person.FIO, Person.INN, student.course, \"group\".name as namegroup, statusStudent.name, Person.AvarageScore, Person.Pasport, Person.Photo, document.scan, document.dateStart, student.Id as idstud FROM Person INNER JOIN student ON student.Id_person = Person.Id INNER JOIN document ON document.Id = student.Id_document INNER JOIN \"group\" ON \"group\".Id = student.Id_group INNER JOIN statusStudent ON statusStudent.Id = student.Id_statusStudent) t1 RIGHT JOIN (SELECT student.Id_person, MAX(document.dateStart) as da FROM student INNER JOIN document ON document.Id = student.Id_document GROUP BY student.Id_person) t2 ON t1.Id = t2.Id_person AND t1.dateStart = t2.da");
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error");
+            }
+        }
+
+        private void переводВВУЗToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                using (TransferVUZ tv = new TransferVUZ(LabelFIO.Text, metroGridStudent[4, metroGridStudent.CurrentCell.RowIndex].Value.ToString(), mgHistory[4, mgHistory.CurrentCell.RowIndex].Value.ToString(), mgHistory[15, mgHistory.CurrentCell.RowIndex].Value.ToString(), mgHistory[16, mgHistory.CurrentCell.RowIndex].Value.ToString(), metroGridStudent[0, metroGridStudent.CurrentCell.RowIndex].Value.ToString(), mgHistory[11, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[12, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[9, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[14, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[17, mgHistory.CurrentRow.Index].Value.ToString()))
+                {
+                    tv.ShowDialog();
+                    historyStudent();
+                    metroGridStudent.DataSource = Data.CreateDataAdapter("SELECT t1.Id, t1.FIO as ФИО, t1.INN as ИНН, t1.course as Курс,t1.namegroup as Группа, t1.name as Статус, t1.Photo, t2.da as 'Дата документа' FROM (SELECT Person.Id, Person.FIO, Person.INN, student.course, \"group\".name as namegroup, statusStudent.name, Person.AvarageScore, Person.Pasport, Person.Photo, document.scan, document.dateStart, student.Id as idstud FROM Person INNER JOIN student ON student.Id_person = Person.Id INNER JOIN document ON document.Id = student.Id_document INNER JOIN \"group\" ON \"group\".Id = student.Id_group INNER JOIN statusStudent ON statusStudent.Id = student.Id_statusStudent) t1 RIGHT JOIN (SELECT student.Id_person, MAX(document.dateStart) as da FROM student INNER JOIN document ON document.Id = student.Id_document GROUP BY student.Id_person) t2 ON t1.Id = t2.Id_person AND t1.dateStart = t2.da");
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void академическийОтпускToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                using (Academ ac = new Academ(LabelFIO.Text, metroGridStudent[4, metroGridStudent.CurrentCell.RowIndex].Value.ToString(), metroGridStudent[0, metroGridStudent.CurrentCell.RowIndex].Value.ToString(), mgHistory[11, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[12, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[13, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[9, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[17, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[14, mgHistory.CurrentRow.Index].Value.ToString()))
+                {
+                    ac.ShowDialog();
+                    historyStudent();
+                    metroGridStudent.DataSource = Data.CreateDataAdapter("SELECT t1.Id, t1.FIO as ФИО, t1.INN as ИНН, t1.course as Курс,t1.namegroup as Группа, t1.name as Статус, t1.Photo, t2.da as 'Дата документа' FROM (SELECT Person.Id, Person.FIO, Person.INN, student.course, \"group\".name as namegroup, statusStudent.name, Person.AvarageScore, Person.Pasport, Person.Photo, document.scan, document.dateStart, student.Id as idstud FROM Person INNER JOIN student ON student.Id_person = Person.Id INNER JOIN document ON document.Id = student.Id_document INNER JOIN \"group\" ON \"group\".Id = student.Id_group INNER JOIN statusStudent ON statusStudent.Id = student.Id_statusStudent) t1 RIGHT JOIN (SELECT student.Id_person, MAX(document.dateStart) as da FROM student INNER JOIN document ON document.Id = student.Id_document GROUP BY student.Id_person) t2 ON t1.Id = t2.Id_person AND t1.dateStart = t2.da");
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void отчислениеToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DeleteStudents ds = new DeleteStudents(LabelFIO.Text, metroGridStudent[4, metroGridStudent.CurrentCell.RowIndex].Value.ToString(), metroGridStudent[0, metroGridStudent.CurrentCell.RowIndex].Value.ToString(), mgHistory[11, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[12, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[9, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[14, mgHistory.CurrentRow.Index].Value.ToString());
+                ds.ShowDialog();
+                historyStudent();
+                metroGridStudent.DataSource = Data.CreateDataAdapter("SELECT t1.Id, t1.FIO as ФИО, t1.INN as ИНН, t1.course as Курс,t1.namegroup as Группа, t1.name as Статус, t1.Photo, t2.da as 'Дата документа' FROM (SELECT Person.Id, Person.FIO, Person.INN, student.course, \"group\".name as namegroup, statusStudent.name, Person.AvarageScore, Person.Pasport, Person.Photo, document.scan, document.dateStart, student.Id as idstud FROM Person INNER JOIN student ON student.Id_person = Person.Id INNER JOIN document ON document.Id = student.Id_document INNER JOIN \"group\" ON \"group\".Id = student.Id_group INNER JOIN statusStudent ON statusStudent.Id = student.Id_statusStudent) t1 RIGHT JOIN (SELECT student.Id_person, MAX(document.dateStart) as da FROM student INNER JOIN document ON document.Id = student.Id_document GROUP BY student.Id_person) t2 ON t1.Id = t2.Id_person AND t1.dateStart = t2.da");
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error");
+            }
+        }
+
+        private void сменаФИОToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                using (Rename rn = new Rename(LabelFIO.Text, metroGridStudent[4, metroGridStudent.CurrentCell.RowIndex].Value.ToString(), metroGridStudent[0, metroGridStudent.CurrentCell.RowIndex].Value.ToString(), mgHistory[11, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[12, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[9, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[14, mgHistory.CurrentRow.Index].Value.ToString()))
+                {
+                    rn.ShowDialog();
+                    historyStudent();
+                    metroGridStudent.DataSource = Data.CreateDataAdapter("SELECT t1.Id, t1.FIO as ФИО, t1.INN as ИНН, t1.course as Курс,t1.namegroup as Группа, t1.name as Статус, t1.Photo, t2.da as 'Дата документа' FROM (SELECT Person.Id, Person.FIO, Person.INN, student.course, \"group\".name as namegroup, statusStudent.name, Person.AvarageScore, Person.Pasport, Person.Photo, document.scan, document.dateStart, student.Id as idstud FROM Person INNER JOIN student ON student.Id_person = Person.Id INNER JOIN document ON document.Id = student.Id_document INNER JOIN \"group\" ON \"group\".Id = student.Id_group INNER JOIN statusStudent ON statusStudent.Id = student.Id_statusStudent) t1 RIGHT JOIN (SELECT student.Id_person, MAX(document.dateStart) as da FROM student INNER JOIN document ON document.Id = student.Id_document GROUP BY student.Id_person) t2 ON t1.Id = t2.Id_person AND t1.dateStart = t2.da");
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void metroTextBoxFind_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+                mbSearchForStudents_Click(new object(), new EventArgs());
+        }
     }
 }

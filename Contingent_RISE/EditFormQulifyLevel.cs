@@ -35,18 +35,28 @@ namespace Contingent_RISE
 
         private void mbAdd_Click(object sender, EventArgs e)
         {
-            if (mbAdd.Text == "Изменить")
+            if (mtbName.Text != "")
             {
-                Data.CreateCommand("UPDATE qulifyLevel SET name='" + mtbName.Text + "' WHERE Id=" + oldid);
-                MetroMessageBox.Show(this, "Вы уверены?", "Изменение", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-            }
-            else
-            {
-                Data.CreateCommand("INSERT INTO qulifyLevel(name) VALUES ('" + mtbName.Text + "')");
-                
-            }
+                if (mbAdd.Text == "Изменить")
+                {
+                    DialogResult result;
+                    result = MetroMessageBox.Show(this, "Вы уверены?", "Изменить квалификационный уровень", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                    if (result == DialogResult.OK)
+                        Data.CreateCommand("UPDATE qulifyLevel SET name='" + mtbName.Text + "' WHERE Id=" + oldid);
 
-            Close();
+                }
+                else
+                {
+                    DialogResult result1;
+                    result1 = MetroMessageBox.Show(this, "Вы уверены?", "Добавить квалификационный уровень", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                    if (result1 == DialogResult.OK)
+                        Data.CreateCommand("INSERT INTO qulifyLevel(name) VALUES ('" + mtbName.Text + "')");
+
+                }
+
+                Close();
+            }
+            else MetroMessageBox.Show(this, "Заполните все поля данными", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }

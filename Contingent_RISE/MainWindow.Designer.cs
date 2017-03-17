@@ -77,13 +77,7 @@
             this.FIOlabel = new MetroFramework.Controls.MetroLabel();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.mPanelForTransfer = new MetroFramework.Controls.MetroPanel();
-            this.mbRename = new MetroFramework.Controls.MetroButton();
-            this.mbDeleteStudent = new MetroFramework.Controls.MetroButton();
             this.metroLabelFIO = new MetroFramework.Controls.MetroLabel();
-            this.mbAcademicOtpysk = new MetroFramework.Controls.MetroButton();
-            this.mbTransferVUZ = new MetroFramework.Controls.MetroButton();
-            this.mbTransferGroup = new MetroFramework.Controls.MetroButton();
-            this.mbTransferCourse = new MetroFramework.Controls.MetroButton();
             this.mgHistory = new MetroFramework.Controls.MetroGrid();
             this.metroGridHistory = new MetroFramework.Controls.MetroGrid();
             this.tabPage3 = new System.Windows.Forms.TabPage();
@@ -93,6 +87,13 @@
             this.mbSearchForStudents = new MetroFramework.Controls.MetroButton();
             this.metroLabel3 = new MetroFramework.Controls.MetroLabel();
             this.metroTextBoxFind = new MetroFramework.Controls.MetroTextBox();
+            this.menuStrip2 = new System.Windows.Forms.MenuStrip();
+            this.пЕСToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.преводВГруппуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.переводВВУЗToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.академическийОтпускToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.отчислениеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.сменаФИОToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.metroPanel2.SuspendLayout();
             this.metroPanel3.SuspendLayout();
@@ -109,6 +110,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.metroGridStudent)).BeginInit();
             this.PanelStudent.SuspendLayout();
             this.metroPanelFind.SuspendLayout();
+            this.menuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -122,7 +124,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(20, 60);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(710, 24);
-            this.menuStrip1.TabIndex = 0;
+            this.menuStrip1.TabIndex = 12;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // файлToolStripMenuItem
@@ -136,7 +138,7 @@
             // выходToolStripMenuItem
             // 
             this.выходToolStripMenuItem.Name = "выходToolStripMenuItem";
-            this.выходToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.выходToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
             this.выходToolStripMenuItem.Text = "Выход";
             this.выходToolStripMenuItem.Click += new System.EventHandler(this.выходToolStripMenuItem_Click);
             // 
@@ -416,9 +418,9 @@
             this.metroTabControlStudent.Controls.Add(this.tabPage2);
             this.metroTabControlStudent.Controls.Add(this.tabPage3);
             this.metroTabControlStudent.Dock = System.Windows.Forms.DockStyle.Top;
-            this.metroTabControlStudent.Location = new System.Drawing.Point(0, 0);
+            this.metroTabControlStudent.Location = new System.Drawing.Point(0, 24);
             this.metroTabControlStudent.Name = "metroTabControlStudent";
-            this.metroTabControlStudent.SelectedIndex = 1;
+            this.metroTabControlStudent.SelectedIndex = 0;
             this.metroTabControlStudent.Size = new System.Drawing.Size(710, 225);
             this.metroTabControlStudent.TabIndex = 11;
             this.metroTabControlStudent.UseSelectable = true;
@@ -535,13 +537,7 @@
             // 
             // mPanelForTransfer
             // 
-            this.mPanelForTransfer.Controls.Add(this.mbRename);
-            this.mPanelForTransfer.Controls.Add(this.mbDeleteStudent);
             this.mPanelForTransfer.Controls.Add(this.metroLabelFIO);
-            this.mPanelForTransfer.Controls.Add(this.mbAcademicOtpysk);
-            this.mPanelForTransfer.Controls.Add(this.mbTransferVUZ);
-            this.mPanelForTransfer.Controls.Add(this.mbTransferGroup);
-            this.mPanelForTransfer.Controls.Add(this.mbTransferCourse);
             this.mPanelForTransfer.Dock = System.Windows.Forms.DockStyle.Top;
             this.mPanelForTransfer.HorizontalScrollbarBarColor = true;
             this.mPanelForTransfer.HorizontalScrollbarHighlightOnWheel = false;
@@ -554,75 +550,15 @@
             this.mPanelForTransfer.VerticalScrollbarHighlightOnWheel = false;
             this.mPanelForTransfer.VerticalScrollbarSize = 10;
             // 
-            // mbRename
-            // 
-            this.mbRename.Location = new System.Drawing.Point(602, 6);
-            this.mbRename.Name = "mbRename";
-            this.mbRename.Size = new System.Drawing.Size(75, 23);
-            this.mbRename.TabIndex = 13;
-            this.mbRename.Text = "Смена ФИО";
-            this.mbRename.UseSelectable = true;
-            this.mbRename.Click += new System.EventHandler(this.mbRename_Click_1);
-            // 
-            // mbDeleteStudent
-            // 
-            this.mbDeleteStudent.Location = new System.Drawing.Point(521, 6);
-            this.mbDeleteStudent.Name = "mbDeleteStudent";
-            this.mbDeleteStudent.Size = new System.Drawing.Size(75, 23);
-            this.mbDeleteStudent.TabIndex = 12;
-            this.mbDeleteStudent.Text = "Отчисление";
-            this.mbDeleteStudent.UseSelectable = true;
-            this.mbDeleteStudent.Click += new System.EventHandler(this.mbDeleteStudent_Click);
-            // 
             // metroLabelFIO
             // 
             this.metroLabelFIO.AutoSize = true;
             this.metroLabelFIO.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.metroLabelFIO.Location = new System.Drawing.Point(691, 6);
+            this.metroLabelFIO.Location = new System.Drawing.Point(11, 7);
             this.metroLabelFIO.Name = "metroLabelFIO";
             this.metroLabelFIO.Size = new System.Drawing.Size(27, 19);
             this.metroLabelFIO.TabIndex = 11;
             this.metroLabelFIO.Text = "***";
-            // 
-            // mbAcademicOtpysk
-            // 
-            this.mbAcademicOtpysk.Location = new System.Drawing.Point(365, 6);
-            this.mbAcademicOtpysk.Name = "mbAcademicOtpysk";
-            this.mbAcademicOtpysk.Size = new System.Drawing.Size(150, 23);
-            this.mbAcademicOtpysk.TabIndex = 10;
-            this.mbAcademicOtpysk.Text = "Академический отпуск";
-            this.mbAcademicOtpysk.UseSelectable = true;
-            this.mbAcademicOtpysk.Click += new System.EventHandler(this.mbAcademicOtpysk_Click);
-            // 
-            // mbTransferVUZ
-            // 
-            this.mbTransferVUZ.Location = new System.Drawing.Point(259, 6);
-            this.mbTransferVUZ.Name = "mbTransferVUZ";
-            this.mbTransferVUZ.Size = new System.Drawing.Size(100, 23);
-            this.mbTransferVUZ.TabIndex = 9;
-            this.mbTransferVUZ.Text = "Перевод в ВУЗ";
-            this.mbTransferVUZ.UseSelectable = true;
-            this.mbTransferVUZ.Click += new System.EventHandler(this.mbTransferVUZ_Click);
-            // 
-            // mbTransferGroup
-            // 
-            this.mbTransferGroup.Location = new System.Drawing.Point(133, 6);
-            this.mbTransferGroup.Name = "mbTransferGroup";
-            this.mbTransferGroup.Size = new System.Drawing.Size(120, 23);
-            this.mbTransferGroup.TabIndex = 8;
-            this.mbTransferGroup.Text = "Перевод в группу";
-            this.mbTransferGroup.UseSelectable = true;
-            this.mbTransferGroup.Click += new System.EventHandler(this.mbTransferGroup_Click);
-            // 
-            // mbTransferCourse
-            // 
-            this.mbTransferCourse.Location = new System.Drawing.Point(6, 6);
-            this.mbTransferCourse.Name = "mbTransferCourse";
-            this.mbTransferCourse.Size = new System.Drawing.Size(121, 23);
-            this.mbTransferCourse.TabIndex = 7;
-            this.mbTransferCourse.Text = "Перевод на курс";
-            this.mbTransferCourse.UseSelectable = true;
-            this.mbTransferCourse.Click += new System.EventHandler(this.mbTransferCourse_Click);
             // 
             // mgHistory
             // 
@@ -748,7 +684,7 @@
             this.metroGridStudent.EnableHeadersVisualStyles = false;
             this.metroGridStudent.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.metroGridStudent.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.metroGridStudent.Location = new System.Drawing.Point(0, 258);
+            this.metroGridStudent.Location = new System.Drawing.Point(0, 282);
             this.metroGridStudent.Name = "metroGridStudent";
             this.metroGridStudent.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -761,7 +697,7 @@
             this.metroGridStudent.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
             this.metroGridStudent.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.metroGridStudent.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.metroGridStudent.Size = new System.Drawing.Size(710, 118);
+            this.metroGridStudent.Size = new System.Drawing.Size(710, 94);
             this.metroGridStudent.TabIndex = 14;
             this.metroGridStudent.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.metroGridStudent_RowEnter);
             // 
@@ -770,6 +706,7 @@
             this.PanelStudent.Controls.Add(this.metroGridStudent);
             this.PanelStudent.Controls.Add(this.metroPanelFind);
             this.PanelStudent.Controls.Add(this.metroTabControlStudent);
+            this.PanelStudent.Controls.Add(this.menuStrip2);
             this.PanelStudent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PanelStudent.HorizontalScrollbarBarColor = true;
             this.PanelStudent.HorizontalScrollbarHighlightOnWheel = false;
@@ -792,7 +729,7 @@
             this.metroPanelFind.HorizontalScrollbarBarColor = true;
             this.metroPanelFind.HorizontalScrollbarHighlightOnWheel = false;
             this.metroPanelFind.HorizontalScrollbarSize = 10;
-            this.metroPanelFind.Location = new System.Drawing.Point(0, 225);
+            this.metroPanelFind.Location = new System.Drawing.Point(0, 249);
             this.metroPanelFind.Name = "metroPanelFind";
             this.metroPanelFind.Size = new System.Drawing.Size(710, 33);
             this.metroPanelFind.TabIndex = 13;
@@ -847,6 +784,64 @@
             this.metroTextBoxFind.UseSelectable = true;
             this.metroTextBoxFind.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.metroTextBoxFind.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            this.metroTextBoxFind.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.metroTextBoxFind_KeyPress);
+            // 
+            // menuStrip2
+            // 
+            this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.пЕСToolStripMenuItem,
+            this.преводВГруппуToolStripMenuItem,
+            this.переводВВУЗToolStripMenuItem,
+            this.академическийОтпускToolStripMenuItem,
+            this.отчислениеToolStripMenuItem,
+            this.сменаФИОToolStripMenuItem});
+            this.menuStrip2.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip2.Name = "menuStrip2";
+            this.menuStrip2.Size = new System.Drawing.Size(710, 24);
+            this.menuStrip2.TabIndex = 15;
+            this.menuStrip2.Text = "menuStrip2";
+            // 
+            // пЕСToolStripMenuItem
+            // 
+            this.пЕСToolStripMenuItem.Name = "пЕСToolStripMenuItem";
+            this.пЕСToolStripMenuItem.Size = new System.Drawing.Size(110, 20);
+            this.пЕСToolStripMenuItem.Text = "Перевод на курс";
+            this.пЕСToolStripMenuItem.Click += new System.EventHandler(this.пЕСToolStripMenuItem_Click);
+            // 
+            // преводВГруппуToolStripMenuItem
+            // 
+            this.преводВГруппуToolStripMenuItem.Name = "преводВГруппуToolStripMenuItem";
+            this.преводВГруппуToolStripMenuItem.Size = new System.Drawing.Size(116, 20);
+            this.преводВГруппуToolStripMenuItem.Text = "Перевод в группу";
+            this.преводВГруппуToolStripMenuItem.Click += new System.EventHandler(this.преводВГруппуToolStripMenuItem_Click);
+            // 
+            // переводВВУЗToolStripMenuItem
+            // 
+            this.переводВВУЗToolStripMenuItem.Name = "переводВВУЗToolStripMenuItem";
+            this.переводВВУЗToolStripMenuItem.Size = new System.Drawing.Size(99, 20);
+            this.переводВВУЗToolStripMenuItem.Text = "Перевод в ВУЗ";
+            this.переводВВУЗToolStripMenuItem.Click += new System.EventHandler(this.переводВВУЗToolStripMenuItem_Click);
+            // 
+            // академическийОтпускToolStripMenuItem
+            // 
+            this.академическийОтпускToolStripMenuItem.Name = "академическийОтпускToolStripMenuItem";
+            this.академическийОтпускToolStripMenuItem.Size = new System.Drawing.Size(146, 20);
+            this.академическийОтпускToolStripMenuItem.Text = "Академический отпуск";
+            this.академическийОтпускToolStripMenuItem.Click += new System.EventHandler(this.академическийОтпускToolStripMenuItem_Click);
+            // 
+            // отчислениеToolStripMenuItem
+            // 
+            this.отчислениеToolStripMenuItem.Name = "отчислениеToolStripMenuItem";
+            this.отчислениеToolStripMenuItem.Size = new System.Drawing.Size(86, 20);
+            this.отчислениеToolStripMenuItem.Text = "Отчисление";
+            this.отчислениеToolStripMenuItem.Click += new System.EventHandler(this.отчислениеToolStripMenuItem_Click);
+            // 
+            // сменаФИОToolStripMenuItem
+            // 
+            this.сменаФИОToolStripMenuItem.Name = "сменаФИОToolStripMenuItem";
+            this.сменаФИОToolStripMenuItem.Size = new System.Drawing.Size(85, 20);
+            this.сменаФИОToolStripMenuItem.Text = "Смена ФИО";
+            this.сменаФИОToolStripMenuItem.Click += new System.EventHandler(this.сменаФИОToolStripMenuItem_Click);
             // 
             // MainWindow
             // 
@@ -881,8 +876,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.metroGridHistory)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.metroGridStudent)).EndInit();
             this.PanelStudent.ResumeLayout(false);
+            this.PanelStudent.PerformLayout();
             this.metroPanelFind.ResumeLayout(false);
             this.metroPanelFind.PerformLayout();
+            this.menuStrip2.ResumeLayout(false);
+            this.menuStrip2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -935,14 +933,15 @@
         private MetroFramework.Controls.MetroTextBox metroTextBoxFind;
         private MetroFramework.Controls.MetroPanel mPanelForTransfer;
         private MetroFramework.Controls.MetroLabel metroLabelFIO;
-        private MetroFramework.Controls.MetroButton mbAcademicOtpysk;
-        private MetroFramework.Controls.MetroButton mbTransferVUZ;
-        private MetroFramework.Controls.MetroButton mbTransferGroup;
-        private MetroFramework.Controls.MetroButton mbTransferCourse;
-        private MetroFramework.Controls.MetroButton mbDeleteStudent;
-        private MetroFramework.Controls.MetroButton mbRename;
         private MetroFramework.Controls.MetroLabel metroLabel3;
         private MetroFramework.Controls.MetroButton mbSearchForStudents;
+        private System.Windows.Forms.MenuStrip menuStrip2;
+        private System.Windows.Forms.ToolStripMenuItem пЕСToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem преводВГруппуToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem переводВВУЗToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem академическийОтпускToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem отчислениеToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem сменаФИОToolStripMenuItem;
     }
 }
 

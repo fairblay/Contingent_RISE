@@ -51,32 +51,30 @@ namespace Contingent_RISE
 
         private void mbOk_Click(object sender, EventArgs e)
         {
-
-            string strb = String.Format("{0: yyyy-MM-dd}", mdtB.Value);
-            string strs = String.Format("{0: yyyy-MM-dd}", mdtSign.Value);
-
-
-
-            Data.CreateCommand("INSERT INTO document(name, typeDocument, number, dateDocument, dateStart, scan, \"description\") VALUES ('Приказ №" + mtbNumDoc.Text + " от " + mdtB.Text + "','Приказ', '" + mtbNumDoc.Text + "','" + strs + "','" + strb + "','" + mlScanName.Text + "','" + mtbDescription.Text + "')");
-            
-
-
-           
-            Data.CreateCommand("UPDATE \"group\" SET course = course+1 WHERE Id=" + mcbGroup.SelectedValue);
-
-            using (SqlConnection con = new SqlConnection(Data.connection))
+             
+            if (mtbNumDoc.Text != "" && mlScanName.Text != "" && mlScanName.Text != " " && mlScanName.Text != "Выберите файл")
             {
-                //ВЫБОРКА СПИСКА ГРУППЫ
-                SqlCommand comm = new SqlCommand("SELECT Id_person, MAX(Id_document) as last_doc FROM student WHERE Id_group="+ mcbGroup.SelectedValue +" GROUP BY Id_person", con);   
-                comm.Connection.Open();
-                SqlDataReader reader = comm.ExecuteReader();
-                while (reader.Read())
+                string strb = String.Format("{0: yyyy-MM-dd}", mdtB.Value);
+                string strs = String.Format("{0: yyyy-MM-dd}", mdtSign.Value);
+                using (SqlConnection con = new SqlConnection(Data.connection))
                 {
-                   Data.CreateCommand("INSERT INTO student VALUES ("+ reader[0].ToString()+",(SELECT MAX(Id) FROM document),"+mcbGroup.SelectedValue+", (SELECT course FROM \"group\" WHERE Id="+mcbGroup.SelectedValue+"), 2, (SELECT Id_profiles FROM \"group\" WHERE Id="+mcbGroup.SelectedValue+"))");
-                     //MessageBox.Show("INSERT INTO student VALUES ("+ reader[0].ToString()+",(SELECT MAX(Id) FROM document),"+mcbGroup.SelectedValue+", (SELECT course FROM \"group\" WHERE Id="+mcbGroup.SelectedValue+"), 2, (SELECT Id_profiles FROM \"group\" WHERE Id="+mcbGroup.SelectedValue+"))");
+                    Data.CreateCommand("INSERT INTO document(name, typeDocument, number, dateDocument, dateStart, scan, \"description\") VALUES ('Приказ №" + mtbNumDoc.Text + " от " + mdtB.Text + "','Приказ', '" + mtbNumDoc.Text + "','" + strs + "','" + strb + "','" + mlScanName.Text + "','" + mtbDescription.Text + "')");
+                    Data.CreateCommand("UPDATE \"group\" SET course = course+1 WHERE Id=" + mcbGroup.SelectedValue);
+
+                    //ВЫБОРКА СПИСКА ГРУППЫ
+                    SqlCommand comm = new SqlCommand("SELECT Id_person, MAX(Id_document) as last_doc FROM student WHERE Id_group=" + mcbGroup.SelectedValue + " GROUP BY Id_person", con);
+                    comm.Connection.Open();
+                    SqlDataReader reader = comm.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Data.CreateCommand("INSERT INTO student VALUES (" + reader[0].ToString() + ",(SELECT MAX(Id) FROM document)," + mcbGroup.SelectedValue + ", (SELECT course FROM \"group\" WHERE Id=" + mcbGroup.SelectedValue + "), 2, (SELECT Id_profiles FROM \"group\" WHERE Id=" + mcbGroup.SelectedValue + "))");
+                        //MessageBox.Show("INSERT INTO student VALUES ("+ reader[0].ToString()+",(SELECT MAX(Id) FROM document),"+mcbGroup.SelectedValue+", (SELECT course FROM \"group\" WHERE Id="+mcbGroup.SelectedValue+"), 2, (SELECT Id_profiles FROM \"group\" WHERE Id="+mcbGroup.SelectedValue+"))");
+                    }
+
+                    Close();
                 }
-                Close();
             }
+            else MetroMessageBox.Show(this, "Заполните все поля данными", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void mbOpen_Click(object sender, EventArgs e)

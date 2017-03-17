@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MetroFramework;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -27,13 +28,22 @@ namespace Contingent_RISE
 
         private void mbOk_Click(object sender, EventArgs e)
         {
-            string strb = String.Format("{0: yyyy-MM-dd}", mdtB.Value);
-            string strs = String.Format("{0: yyyy-MM-dd}", mdtSign.Value);
-            statuse();
-            Data.CreateCommand("INSERT INTO document(name, typeDocument, number, dateDocument, dateStart, scan, \"description\") VALUES ('Приказ №" + mtbNumDoc.Text + " от " + mdtB.Text + "','Приказ', '" + mtbNumDoc.Text + "','" + strs + "','" + strb + "','" + mlScanName.Text + "','" + mtbDescription.Text + "')");
-            Data.CreateCommand("INSERT INTO student(Id_person, Id_document, Id_group, course, Id_statusStudent, Id_profiles) VALUES ('" + Idperson + "',(SELECT MAX(Id) FROM document),'" + Idgroup + "','" + coursee + "','"+status +"','" + Idprofiles + "')");
-            
-            Close();
+            if (mtbNumDoc.Text != "" && mlScanName.Text != " " && mlScanName.Text != "" && mlScanName.Text != "Выберите файл")
+            {
+                if (metroRadioButton1.Checked || metroRadioButton2.Checked)
+                {
+                    string strb = String.Format("{0: yyyy-MM-dd}", mdtB.Value);
+                    string strs = String.Format("{0: yyyy-MM-dd}", mdtSign.Value);
+                    statuse();
+                    Data.CreateCommand("INSERT INTO document(name, typeDocument, number, dateDocument, dateStart, scan, \"description\") VALUES ('Приказ №" + mtbNumDoc.Text + " от " + mdtB.Text + "','Приказ', '" + mtbNumDoc.Text + "','" + strs + "','" + strb + "','" + mlScanName.Text + "','" + mtbDescription.Text + "')");
+                    Data.CreateCommand("INSERT INTO student(Id_person, Id_document, Id_group, course, Id_statusStudent, Id_profiles) VALUES ('" + Idperson + "',(SELECT MAX(Id) FROM document),'" + Idgroup + "','" + coursee + "','" + status + "','" + Idprofiles + "')");
+
+                    Close();
+                }
+                else MetroMessageBox.Show(this, "Выберите статус", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else MetroMessageBox.Show(this, "Заполните все поля данными", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
         }
 
         private void mbOpen_Click(object sender, EventArgs e)

@@ -31,21 +31,29 @@ namespace Contingent_RISE
 
         private void mbEdit_Click(object sender, EventArgs e)
         {
-            if (mbEdit.Text == "Изменить")
+            if (mtbCity.Text != "")
             {
-                Data.CreateCommand("UPDATE city SET name='" + mtbCity.Text + "' WHERE Id=" + oldid);
-                //MessageBox.Show("UPDATE city SET name='" + mtbCity.Text + "' WHERE Id=" + oldid);
-
-                MetroMessageBox.Show(this, "Вы уверены?", "Изменение", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                if (mbEdit.Text == "Изменить")
+                {
+                    //MessageBox.Show("UPDATE city SET name='" + mtbCity.Text + "' WHERE Id=" + oldid);
+                    DialogResult result;
+                    result = MetroMessageBox.Show(this, "Вы уверены?", "Изменить город", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                    if (result == DialogResult.OK)
+                        Data.CreateCommand("UPDATE city SET name='" + mtbCity.Text + "' WHERE Id=" + oldid);
+                }
+                else
+                {
+                    DialogResult result1;
+                    result1 = MetroMessageBox.Show(this, "Вы уверены?", "Добавить город", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                    if (result1 == DialogResult.OK)
+                        Data.CreateCommand("INSERT INTO city(name) VALUES ('" + mtbCity.Text + "')");
+                    // MessageBox.Show("INSERT INTO city(name) VALUES ('" + mtbCity.Text + "')");
+                }
+                Close();
             }
-            else
-            {
-                Data.CreateCommand("INSERT INTO city(name) VALUES ('" + mtbCity.Text + "')");
-               // MessageBox.Show("INSERT INTO city(name) VALUES ('" + mtbCity.Text + "')");
-            }
-
-            Close();
-        }
+            else MetroMessageBox.Show(this, "Заполните все поля данными", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                
+         }
 
         private void mbCancel_Click(object sender, EventArgs e)
         {

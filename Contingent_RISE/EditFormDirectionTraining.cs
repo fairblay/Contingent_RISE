@@ -36,19 +36,28 @@ namespace Contingent_RISE
 
         private void mbEdit_Click(object sender, EventArgs e)
         {
-            if (mbEdit.Text == "Изменить")
+            if (mtbName.Text != "" && mtbCode.Text !="")
             {
-                Data.CreateCommand("UPDATE directionTraining SET name='" + mtbName.Text + "', code='"+mtbCode.Text + "' WHERE Id=" + oldid);
-                //MessageBox.Show("UPDATE directionTraining SET name='" + mtbName.Text + "', code='" + mtbCode.Text + "' WHERE Id=" + oldid);
-                MetroMessageBox.Show(this, "Вы уверены?", "Изменение", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-            }
-            else
-            {
-                Data.CreateCommand("INSERT INTO directionTraining(name, code) VALUES ('" + mtbName.Text + "','"+mtbCode.Text+"')");
+                if (mbEdit.Text == "Изменить")
+                {
+                    DialogResult result;
+                    result = MetroMessageBox.Show(this, "Вы уверены?", "Изменить направление подготовки", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                    if (result == DialogResult.OK)
+                        Data.CreateCommand("UPDATE directionTraining SET name='" + mtbName.Text + "', code='" + mtbCode.Text + "' WHERE Id=" + oldid);
+                    //MessageBox.Show("UPDATE directionTraining SET name='" + mtbName.Text + "', code='" + mtbCode.Text + "' WHERE Id=" + oldid);
 
-            }
+                }
+                else
+                {
+                    DialogResult result1;
+                    result1 = MetroMessageBox.Show(this, "Вы уверены?", "Добавить направление подготовки", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                    if (result1 == DialogResult.OK)
+                        Data.CreateCommand("INSERT INTO directionTraining(name, code) VALUES ('" + mtbName.Text + "','" + mtbCode.Text + "')");
 
-            Close();
+                }
+                Close(); 
+            }
+            else MetroMessageBox.Show(this, "Заполните все поля данными", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }
