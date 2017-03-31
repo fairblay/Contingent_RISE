@@ -13,25 +13,30 @@ using System.IO;
 
 namespace Contingent_RISE
 {
+
+
     public partial class MainWindow : MetroFramework.Forms.MetroForm
     {
-        private int selectedIndex = -1;
+        private int selectedIndex = -1; //для справочников
         string idStudent = ""; //id текущего студента
+
         public MainWindow()
         {
+            /*Запуск идентификации пользователя*/
             LoginForm lf = new LoginForm();
             lf.ShowDialog();
             InitializeComponent();
-            metroTabControl1.SelectedIndex = -1;
-            metroTabControlStudent.SelectedIndex = 0;
+            metroTabControl1.SelectedIndex = -1; //TAB'ы для справочников
+            metroTabControlStudent.SelectedIndex = 0; //TAB'ы профиля студентов
+
+          
             
         }
         
         private void MainWindow_Load(object sender, EventArgs e)
         {
             
-          
-            
+                     
             /* try
             {
                 con = new SqlConnection("Server=labit-1\\sqlexpress;Database=RISO;uid=test;pwd=test");
@@ -44,6 +49,7 @@ namespace Contingent_RISE
                 MessageBox.Show(ex.Message, "Соединение с БД", MessageBoxButtons.OK, MessageBoxIcon.Error);
             } */
         }
+
 
         private void оПрограммеToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -66,23 +72,21 @@ namespace Contingent_RISE
             VPO.Show(); */
         }
 
+        private void VisiblePanels()
+        {
+            PanelStudent.Visible = false;
+            PanelDictionary.Visible = false;
+           
+        }
+
         private void справочникиToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
             VisiblePanels();
             PanelDictionary.Visible = true;
-
             metroTabControl1.SelectedIndex = 0;
         }
-
-        private void metroTabControl1_TabIndexChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void metroTabControl1_Selected(object sender, TabControlEventArgs e)
-        {
-            
-        }
+        
         
         private void updateDataGrid (string query)
         {
@@ -90,6 +94,7 @@ namespace Contingent_RISE
             metroGrid1.DataSource = Data.CreateDataAdapter(query);
             metroGrid1.Columns[0].Visible = false; 
         }
+
         private void metroTabControl1_Selecting(object sender, TabControlCancelEventArgs e)
         {
             
@@ -257,16 +262,20 @@ namespace Contingent_RISE
         private void студентыToolStripMenuItem_Click(object sender, EventArgs e)
         {
             VisiblePanels();
+
             PanelStudent.Visible = true;
+
             metroGridStudent.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             mgHistory.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
-            metroGridStudent.DataSource = Data.CreateDataAdapter("SELECT t1.Id, t1.FIO as ФИО, t1.INN as ИНН, t1.course as Курс,t1.namegroup as Группа, t1.name as Статус, t1.Photo, t2.da as 'Дата документа' FROM (SELECT Person.Id, Person.FIO, Person.INN, student.course, \"group\".name as namegroup, statusStudent.name, Person.AvarageScore, Person.Pasport, Person.Photo, document.scan, document.dateStart, student.Id as idstud FROM Person INNER JOIN student ON student.Id_person = Person.Id INNER JOIN document ON document.Id = student.Id_document INNER JOIN \"group\" ON \"group\".Id = student.Id_group INNER JOIN statusStudent ON statusStudent.Id = student.Id_statusStudent) t1 RIGHT JOIN (SELECT student.Id_person, MAX(document.dateStart) as da FROM student INNER JOIN document ON document.Id = student.Id_document GROUP BY student.Id_person) t2 ON t1.Id = t2.Id_person AND t1.dateStart = t2.da");
+            //metroGridStudent.DataSource = Data.CreateDataAdapter("SELECT t1.Id, t1.FIO as ФИО, t1.INN as ИНН, t1.course as Курс,t1.namegroup as Группа, t1.name as Статус, t1.Photo, t2.da as 'Дата документа' FROM (SELECT Person.Id, Person.FIO, Person.INN, student.course, \"group\".name as namegroup, statusStudent.name, Person.AvarageScore, Person.Pasport, Person.Photo, document.scan, document.dateStart, student.Id as idstud FROM Person INNER JOIN student ON student.Id_person = Person.Id INNER JOIN document ON document.Id = student.Id_document INNER JOIN \"group\" ON \"group\".Id = student.Id_group INNER JOIN statusStudent ON statusStudent.Id = student.Id_statusStudent) t1 RIGHT JOIN (SELECT student.Id_person, MAX(document.dateStart) as da FROM student INNER JOIN document ON document.Id = student.Id_document GROUP BY student.Id_person) t2 ON t1.Id = t2.Id_person AND t1.dateStart = t2.da");
+            metroGridStudent.DataSource = Data.CreateDataAdapter("SELECT Id, FIO as 'ФИО', INN as 'ИНН' FROM Person");
             metroGridStudent.Focus();
             metroGridStudent.ReadOnly = true;
             mgHistory.ReadOnly = true;
+            //historyStudent();
             //mbOutsideTr.Visible = false;
             //mbInsideTr.Visible = false;
-            
+
             //MessageBox.Show(metroGridStudent.CurrentRow.Index.ToString());
             //string str = metroGridStudent.CurrentRow.Index.ToString();
             //personData("0");
@@ -282,8 +291,8 @@ namespace Contingent_RISE
                idStudent  = metroGridStudent[0, x].Value.ToString();
                // MessageBox.Show("" + metroGridStudent[0,x].Value.ToString());
                 metroGridStudent.Columns[0].Visible = false;
-                metroGridStudent.Columns[6].Visible = false;
-           
+
+
 
             using (SqlConnection con = new SqlConnection(Data.connection))
                 ///Для безопасности
@@ -319,11 +328,7 @@ namespace Contingent_RISE
             
 
         } 
-        public void VisiblePanels()
-        {
-            PanelStudent.Visible = false;
-            PanelDictionary.Visible = false;
-        }
+      
 
         private void metroGridStudent_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
@@ -352,26 +357,19 @@ namespace Contingent_RISE
                 //mbOutsideTr.Visible = true;
                 //mbInsideTr.Visible = true;
             }
-            else
-            {
-               // mbOutsideTr.Visible = false;
-                //mbInsideTr.Visible = false;
-            }
+        
         }
         private void historyStudent()
         {
             mgHistory.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             //  mgHistory.DataSource = Data.CreateDataAdapter("SELECT Person.Id, Person.FIO as ФИО, Person.INN as ИНН,student.course as Курс, \"group\".name as Группа, statusStudent.name as Статус, Person.photo FROM student INNER JOIN Person ON student.Id_person=Person.Id INNER JOIN \"group\" ON student.Id_group=\"group\".Id INNER JOIN statusStudent ON student.Id_statusStudent=statusStudent.Id");
-            mgHistory.DataSource = Data.CreateDataAdapter("SELECT Person.Id, student.Id,document.dateStart as 'Дата вступления документа', VUZ.name as ВУЗ, directionTraining.name as 'Направление в ВУЗе',qulifyLevel.name as 'Квалификационный уровень',\"form\".name as 'Форма обучения',profiles.name as 'Профиль', \"group\".name as Группа,student.course as Курс, statusStudent.name as 'Статус студента', profiles.Id as 'PRO', student.Id_document as 'Iddoc', student.Id_statusStudent as 'IdSS', student.Id_group as 'IdGR', directionTraining.code, VUZ.Id as 'IdVUZ', \"group\".Id_VUZ as 'IDV', document.description as 'Заметки' FROM student INNER JOIN Person ON student.Id_person=Person.Id INNER JOIN \"group\" ON student.Id_group=\"group\".Id INNER JOIN statusStudent ON student.Id_statusStudent=statusStudent.Id INNER JOIN document ON student.Id_document=document.Id INNER JOIN profiles ON student.Id_profiles=profiles.Id INNER JOIN direction ON profiles.Id_direction=direction.Id INNER JOIN VUZ ON direction.Id_VUZ=VUZ.Id INNER JOIN directionTraining ON directionTraining.Id=direction.Id_directionTraining INNER JOIN qulifyLevel ON profiles.Id_qulifyLevel=qulifyLevel.Id INNER JOIN \"form\" ON profiles.Id_form=\"form\".Id WHERE Person.Id = " + idStudent + "ORDER BY document.Id DESC");
+            mgHistory.DataSource = Data.CreateDataAdapter("SELECT Person.Id, student.Id,document.dateStart as 'Дата вступления документа', VUZ.name as ВУЗ, directionTraining.name as 'Направление в ВУЗе',qulifyLevel.name as 'Квалификационный уровень',\"form\".name as 'Форма обучения',profiles.name as 'Профиль', \"group\".name as Группа,student.course as Курс, statusStudent.name as 'Статус студента', profiles.Id as 'PRO', student.Id_document as 'Iddoc', student.Id_statusStudent as 'IdSS', student.Id_group as 'IdGR', directionTraining.code, VUZ.Id as 'IdVUZ', \"group\".Id_VUZ as 'IDV', document.description as 'Заметки' FROM student INNER JOIN Person ON student.Id_person = Person.Id INNER JOIN \"group\" ON student.Id_group = \"group\".Id INNER JOIN profiles ON \"group\".Id_profiles = profiles.Id INNER JOIN VUZ ON \"group\".Id_VUZ = VUZ.Id INNER JOIN statusStudent ON student.Id_statusStudent = statusStudent.Id INNER JOIN document ON student.Id_document = document.Id INNER JOIN direction ON profiles.Id_direction = direction.Id INNER JOIN directionTraining ON directionTraining.Id = direction.Id_directionTraining INNER JOIN qulifyLevel ON profiles.Id_qulifyLevel = qulifyLevel.Id INNER JOIN \"form\" ON profiles.Id_form = \"form\".Id WHERE Person.Id = "+idStudent+ " ORDER BY document.Id DESC");
+            
             mgHistory.Columns[0].Visible = false;
             mgHistory.Columns[1].Visible = false;
-            mgHistory.Columns[11].Visible = false;
-            mgHistory.Columns[12].Visible = false;
-            mgHistory.Columns[13].Visible = false;
-            mgHistory.Columns[14].Visible = false;
-            mgHistory.Columns[15].Visible = false;
-            mgHistory.Columns[16].Visible = false;
-            mgHistory.Columns[17].Visible = false;
+            for(int i=11; i<18; ++i)
+                 mgHistory.Columns[i].Visible = false;
+           
         }
 
 
@@ -403,8 +401,7 @@ namespace Contingent_RISE
                 TransferCouse tc = new TransferCouse();
                 tc.ShowDialog();
                 historyStudent();
-                metroGridStudent.DataSource = Data.CreateDataAdapter("SELECT t1.Id, t1.FIO as ФИО, t1.INN as ИНН, t1.course as Курс,t1.namegroup as Группа, t1.name as Статус, t1.Photo, t2.da as 'Дата документа' FROM (SELECT Person.Id, Person.FIO, Person.INN, student.course, \"group\".name as namegroup, statusStudent.name, Person.AvarageScore, Person.Pasport, Person.Photo, document.scan, document.dateStart, student.Id as idstud FROM Person INNER JOIN student ON student.Id_person = Person.Id INNER JOIN document ON document.Id = student.Id_document INNER JOIN \"group\" ON \"group\".Id = student.Id_group INNER JOIN statusStudent ON statusStudent.Id = student.Id_statusStudent) t1 RIGHT JOIN (SELECT student.Id_person, MAX(document.dateStart) as da FROM student INNER JOIN document ON document.Id = student.Id_document GROUP BY student.Id_person) t2 ON t1.Id = t2.Id_person AND t1.dateStart = t2.da");
-
+                metroGridStudent.DataSource = Data.CreateDataAdapter("SELECT Id, FIO as 'ФИО', INN as 'ИНН' FROM Person");
             }
             catch (Exception ex)
             {
@@ -416,15 +413,15 @@ namespace Contingent_RISE
         {
             try
             {
-                TransferGroup tg = new TransferGroup(LabelFIO.Text, metroGridStudent[4, metroGridStudent.CurrentCell.RowIndex].Value.ToString(), metroGridStudent[0, metroGridStudent.CurrentCell.RowIndex].Value.ToString(), mgHistory[11, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[12, mgHistory.CurrentRow.Index].Value.ToString(), metroGridStudent[3, metroGridStudent.CurrentCell.RowIndex].Value.ToString(), mgHistory[9, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[17, mgHistory.CurrentRow.Index].Value.ToString());
+
+                TransferGroup tg = new TransferGroup(LabelFIO.Text, metroGridStudent[0, metroGridStudent.CurrentCell.RowIndex].Value.ToString(), mgHistory[11, 0].Value.ToString(), mgHistory[12, 0].Value.ToString(), mgHistory[9, 0].Value.ToString(), mgHistory[17, 0].Value.ToString(), idStudent);
                 tg.ShowDialog();
                 historyStudent();
-                metroGridStudent.DataSource = Data.CreateDataAdapter("SELECT t1.Id, t1.FIO as ФИО, t1.INN as ИНН, t1.course as Курс,t1.namegroup as Группа, t1.name as Статус, t1.Photo, t2.da as 'Дата документа' FROM (SELECT Person.Id, Person.FIO, Person.INN, student.course, \"group\".name as namegroup, statusStudent.name, Person.AvarageScore, Person.Pasport, Person.Photo, document.scan, document.dateStart, student.Id as idstud FROM Person INNER JOIN student ON student.Id_person = Person.Id INNER JOIN document ON document.Id = student.Id_document INNER JOIN \"group\" ON \"group\".Id = student.Id_group INNER JOIN statusStudent ON statusStudent.Id = student.Id_statusStudent) t1 RIGHT JOIN (SELECT student.Id_person, MAX(document.dateStart) as da FROM student INNER JOIN document ON document.Id = student.Id_document GROUP BY student.Id_person) t2 ON t1.Id = t2.Id_person AND t1.dateStart = t2.da");
-
+                metroGridStudent.DataSource = Data.CreateDataAdapter("SELECT Id, FIO as 'ФИО', INN as 'ИНН' FROM Person");
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error");
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -433,12 +430,11 @@ namespace Contingent_RISE
             try
             {
 
-                using (TransferVUZ tv = new TransferVUZ(LabelFIO.Text, metroGridStudent[4, metroGridStudent.CurrentCell.RowIndex].Value.ToString(), mgHistory[4, mgHistory.CurrentCell.RowIndex].Value.ToString(), mgHistory[15, mgHistory.CurrentCell.RowIndex].Value.ToString(), mgHistory[16, mgHistory.CurrentCell.RowIndex].Value.ToString(), metroGridStudent[0, metroGridStudent.CurrentCell.RowIndex].Value.ToString(), mgHistory[11, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[12, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[9, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[14, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[17, mgHistory.CurrentRow.Index].Value.ToString()))
+                using (TransferVUZ tv = new TransferVUZ(LabelFIO.Text, mgHistory[4, 0].Value.ToString(), mgHistory[15, 0].Value.ToString(), mgHistory[16, 0].Value.ToString(), metroGridStudent[0, metroGridStudent.CurrentCell.RowIndex].Value.ToString(), mgHistory[11,0].Value.ToString(), mgHistory[12, 0].Value.ToString(), mgHistory[9, 0].Value.ToString(), mgHistory[14, 0].Value.ToString(), mgHistory[17, 0].Value.ToString(), idStudent))
                 {
                     tv.ShowDialog();
                     historyStudent();
-                    metroGridStudent.DataSource = Data.CreateDataAdapter("SELECT t1.Id, t1.FIO as ФИО, t1.INN as ИНН, t1.course as Курс,t1.namegroup as Группа, t1.name as Статус, t1.Photo, t2.da as 'Дата документа' FROM (SELECT Person.Id, Person.FIO, Person.INN, student.course, \"group\".name as namegroup, statusStudent.name, Person.AvarageScore, Person.Pasport, Person.Photo, document.scan, document.dateStart, student.Id as idstud FROM Person INNER JOIN student ON student.Id_person = Person.Id INNER JOIN document ON document.Id = student.Id_document INNER JOIN \"group\" ON \"group\".Id = student.Id_group INNER JOIN statusStudent ON statusStudent.Id = student.Id_statusStudent) t1 RIGHT JOIN (SELECT student.Id_person, MAX(document.dateStart) as da FROM student INNER JOIN document ON document.Id = student.Id_document GROUP BY student.Id_person) t2 ON t1.Id = t2.Id_person AND t1.dateStart = t2.da");
-
+                    metroGridStudent.DataSource = Data.CreateDataAdapter("SELECT Id, FIO as 'ФИО', INN as 'ИНН' FROM Person");
                 }
             }
             catch (Exception ex)
@@ -452,12 +448,11 @@ namespace Contingent_RISE
             try
             {
 
-                using (Academ ac = new Academ(LabelFIO.Text, metroGridStudent[4, metroGridStudent.CurrentCell.RowIndex].Value.ToString(), metroGridStudent[0, metroGridStudent.CurrentCell.RowIndex].Value.ToString(), mgHistory[11, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[12, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[13, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[9, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[17, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[14, mgHistory.CurrentRow.Index].Value.ToString()))
+                using (Academ ac = new Academ(LabelFIO.Text, metroGridStudent[0, metroGridStudent.CurrentCell.RowIndex].Value.ToString(), mgHistory[11, 0].Value.ToString(), mgHistory[12, 0].Value.ToString(), mgHistory[13, 0].Value.ToString(), mgHistory[9, 0].Value.ToString(), mgHistory[17, 0].Value.ToString(), mgHistory[14, 0].Value.ToString(), idStudent))
                 {
                     ac.ShowDialog();
                     historyStudent();
-                    metroGridStudent.DataSource = Data.CreateDataAdapter("SELECT t1.Id, t1.FIO as ФИО, t1.INN as ИНН, t1.course as Курс,t1.namegroup as Группа, t1.name as Статус, t1.Photo, t2.da as 'Дата документа' FROM (SELECT Person.Id, Person.FIO, Person.INN, student.course, \"group\".name as namegroup, statusStudent.name, Person.AvarageScore, Person.Pasport, Person.Photo, document.scan, document.dateStart, student.Id as idstud FROM Person INNER JOIN student ON student.Id_person = Person.Id INNER JOIN document ON document.Id = student.Id_document INNER JOIN \"group\" ON \"group\".Id = student.Id_group INNER JOIN statusStudent ON statusStudent.Id = student.Id_statusStudent) t1 RIGHT JOIN (SELECT student.Id_person, MAX(document.dateStart) as da FROM student INNER JOIN document ON document.Id = student.Id_document GROUP BY student.Id_person) t2 ON t1.Id = t2.Id_person AND t1.dateStart = t2.da");
-
+                    metroGridStudent.DataSource = Data.CreateDataAdapter("SELECT Id, FIO as 'ФИО', INN as 'ИНН' FROM Person");
                 }
             }
             catch (Exception ex)
@@ -470,11 +465,10 @@ namespace Contingent_RISE
         {
             try
             {
-                DeleteStudents ds = new DeleteStudents(LabelFIO.Text, metroGridStudent[4, metroGridStudent.CurrentCell.RowIndex].Value.ToString(), metroGridStudent[0, metroGridStudent.CurrentCell.RowIndex].Value.ToString(), mgHistory[11, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[12, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[9, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[14, mgHistory.CurrentRow.Index].Value.ToString());
+                DeleteStudents ds = new DeleteStudents(LabelFIO.Text, metroGridStudent[0, metroGridStudent.CurrentCell.RowIndex].Value.ToString(), mgHistory[11, 0].Value.ToString(), mgHistory[12,0].Value.ToString(), mgHistory[9, 0].Value.ToString(), mgHistory[14, 0].Value.ToString(), idStudent);
                 ds.ShowDialog();
                 historyStudent();
-                metroGridStudent.DataSource = Data.CreateDataAdapter("SELECT t1.Id, t1.FIO as ФИО, t1.INN as ИНН, t1.course as Курс,t1.namegroup as Группа, t1.name as Статус, t1.Photo, t2.da as 'Дата документа' FROM (SELECT Person.Id, Person.FIO, Person.INN, student.course, \"group\".name as namegroup, statusStudent.name, Person.AvarageScore, Person.Pasport, Person.Photo, document.scan, document.dateStart, student.Id as idstud FROM Person INNER JOIN student ON student.Id_person = Person.Id INNER JOIN document ON document.Id = student.Id_document INNER JOIN \"group\" ON \"group\".Id = student.Id_group INNER JOIN statusStudent ON statusStudent.Id = student.Id_statusStudent) t1 RIGHT JOIN (SELECT student.Id_person, MAX(document.dateStart) as da FROM student INNER JOIN document ON document.Id = student.Id_document GROUP BY student.Id_person) t2 ON t1.Id = t2.Id_person AND t1.dateStart = t2.da");
-
+                metroGridStudent.DataSource = Data.CreateDataAdapter("SELECT Id, FIO as 'ФИО', INN as 'ИНН' FROM Person");
             }
             catch (Exception ex)
             {
@@ -487,12 +481,11 @@ namespace Contingent_RISE
             try
             {
 
-                using (Rename rn = new Rename(LabelFIO.Text, metroGridStudent[4, metroGridStudent.CurrentCell.RowIndex].Value.ToString(), metroGridStudent[0, metroGridStudent.CurrentCell.RowIndex].Value.ToString(), mgHistory[11, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[12, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[9, mgHistory.CurrentRow.Index].Value.ToString(), mgHistory[14, mgHistory.CurrentRow.Index].Value.ToString()))
+                using (Rename rn = new Rename(LabelFIO.Text, metroGridStudent[0, metroGridStudent.CurrentCell.RowIndex].Value.ToString(), mgHistory[11, 0].Value.ToString(), mgHistory[12, 0].Value.ToString(), mgHistory[9, 0].Value.ToString(), mgHistory[14, 0].Value.ToString(), idStudent))
                 {
                     rn.ShowDialog();
                     historyStudent();
-                    metroGridStudent.DataSource = Data.CreateDataAdapter("SELECT t1.Id, t1.FIO as ФИО, t1.INN as ИНН, t1.course as Курс,t1.namegroup as Группа, t1.name as Статус, t1.Photo, t2.da as 'Дата документа' FROM (SELECT Person.Id, Person.FIO, Person.INN, student.course, \"group\".name as namegroup, statusStudent.name, Person.AvarageScore, Person.Pasport, Person.Photo, document.scan, document.dateStart, student.Id as idstud FROM Person INNER JOIN student ON student.Id_person = Person.Id INNER JOIN document ON document.Id = student.Id_document INNER JOIN \"group\" ON \"group\".Id = student.Id_group INNER JOIN statusStudent ON statusStudent.Id = student.Id_statusStudent) t1 RIGHT JOIN (SELECT student.Id_person, MAX(document.dateStart) as da FROM student INNER JOIN document ON document.Id = student.Id_document GROUP BY student.Id_person) t2 ON t1.Id = t2.Id_person AND t1.dateStart = t2.da");
-
+                    metroGridStudent.DataSource = Data.CreateDataAdapter("SELECT Id, FIO as 'ФИО', INN as 'ИНН' FROM Person");
                 }
             }
             catch (Exception ex)

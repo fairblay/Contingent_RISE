@@ -18,10 +18,10 @@ namespace Contingent_RISE
         string Idperson;
         string Idprofiles;
         string Iddoc;
-        string coursee, Idstatus, Idgroup,IdVUZ;
-        int IdprofilesInDg;
+        string coursee, Idgroup,IdVUZ, IdStudent;
+        int IdprofilesInDg, IdStatusVUZ;
 
-        public TransferVUZ(string FIO, string group, string directionTrainingName,string directionTrCode, string idVUZ, string Id_person, string Id_profiles, string Id_doc, string Course, string Id_group, string Id_VUZ)
+        public TransferVUZ(string FIO, string directionTrainingName,string directionTrCode, string idVUZ, string Id_person, string Id_profiles, string Id_doc, string Course, string Id_group, string Id_VUZ, string Id_Student)
         {
             InitializeComponent();
 
@@ -31,15 +31,18 @@ namespace Contingent_RISE
             coursee = Course;
             Idgroup = Id_group;
             IdVUZ = Id_VUZ;
-
+            IdStudent = Id_Student;
             mcbVUZ.DataSource = Data.CreateDataAdapter("SELECT Id, name FROM VUZ");
-
-            //mcbGroupIn.DataSource = Data.CreateCommandDataReader("SELECT Id, name FROM \"group\" WHERE Id_profiles=" + mgVUZ[0, mgVUZ.CurrentRow.Index].Value.ToString());
             mlFIO.Text += "   "+FIO;
-            mlGroup.Text += "   " + group;
-            mlDirectionTraining.Text += "   " + directionTrCode +" "+directionTrainingName;
-            
-           
+            mgTransV.DataSource = Data.CreateDataAdapter("SELECT studentVUZ.Id, Id_person, Id_group, VUZ.name as 'ВУЗ', directionTraining.name as 'Направление в ВУЗе', qulifyLevel.name as 'Квалификационный уровень', \"form\".name as 'Форма обучения', profiles.name as 'Профиль', \"group\".name as 'Группа', \"group\".course as 'Курс', studentVUZ.Id_VUZ, profiles.Id FROM studentVUZ INNER JOIN \"group\" ON studentVUZ.Id_group = \"group\".Id INNER JOIN VUZ ON studentVUZ.Id_VUZ = VUZ.Id INNER JOIN profiles ON \"group\".Id_profiles = profiles.Id INNER JOIN \"form\" ON profiles.Id_form = \"form\".Id INNER JOIN qulifyLevel ON profiles.Id_qulifyLevel = qulifyLevel.Id INNER JOIN direction ON profiles.Id_direction = direction.Id INNER JOIN directionTraining ON direction.Id_directionTraining = directionTraining.Id WHERE Id_person = " + IdStudent);
+            mgTransV.Columns[0].Visible = false;
+            mgTransV.Columns[1].Visible = false;
+            mgTransV.Columns[2].Visible = false;
+            mgTransV.Columns[10].Visible = false;
+            mgTransV.Columns[11].Visible = false;
+            mgTransV.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+
+
             mgVUZ.Columns[0].Visible = false;
             mgVUZ.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;         
             //MessageBox.Show("SELECT profiles.Id, qulifyLevel.name, directionTraining.code, directionTraining.name, profiles.name, form.name, direction.\"year\" FROM profiles INNER JOIN form ON profiles.Id_form=form.Id INNER JOIN qulifyLevel ON profiles.Id_qulifyLevel=qulifyLevel.Id INNER JOIN direction ON profiles.Id_direction=direction.Id INNER JOIN directionTraining ON direction.Id_directionTraining=directionTraining.Id INNER JOIN VUZ ON direction.Id_VUZ=VUZ.Id WHERE VUZ.Id='" + mcbVUZ.SelectedValue+"'");
@@ -67,10 +70,10 @@ namespace Contingent_RISE
                 if (e.RowIndex + 1 < d.RowCount)
 
                 {
-                     //MessageBox.Show(d.RowCount.ToString() + " " + e.RowIndex.ToString());
+                    //MessageBox.Show(d.RowCount.ToString() + " " + e.RowIndex.ToString());
                     num = e.RowIndex;
-                    
 
+                    IdStatusVUZ = Convert.ToInt32(mgTransV[0, mgTransV.CurrentCell.RowIndex].Value.ToString());
                     IdprofilesInDg = Convert.ToInt32 (mgVUZ[0, num].Value.ToString());
                     mcbGroupIn.DataSource = Data.CreateDataAdapter("SELECT Id, name FROM \"group\" WHERE Id_profiles="+ IdprofilesInDg);
 
@@ -87,9 +90,11 @@ namespace Contingent_RISE
                 string strs = String.Format("{0: yyyy-MM-dd}", mdtSign.Value);
 
                 Data.CreateCommand("INSERT INTO document(name, typeDocument, number, dateDocument, dateStart, scan, \"description\") VALUES ('Приказ №" + mtbNumber.Text + " от " + mdtB.Text + "','Приказ', '" + mtbNumber.Text + "','" + strs + "','" + strb + "','" + mlScanName.Text + "','" + mtbDescription.Text + "')");
-                Data.CreateCommand("INSERT INTO student(Id_person, Id_document, Id_group, course, Id_statusStudent, Id_profiles) VALUES ('" + Idperson + "',(SELECT MAX(Id) FROM document),'" + mcbGroupIn.SelectedValue + "','" + coursee + "','2','" + IdprofilesInDg + "')");
+                Data.CreateCommand("INSERT INTO student(Id_person, Id_document, Id_group, course, Id_statusStudent, Id_profiles) VALUES ('" + Idperson + "',(SELECT MAX(Id) FROM document),'" + mcbGroupIn.SelectedValue + "',(SELECT course FROM \"group\" WHERE Id = " + mcbGroupIn.SelectedValue + "),'2','" + IdprofilesInDg + "')"); // 2 - СТАТУС ПЕРЕВЕДЕН
+                Data.CreateCommand("UPDATE studentVUZ SET Id_group= "+mcbGroupIn.SelectedValue+", Id_VUZ= "+mcbVUZ.SelectedValue+" WHERE Id="+IdStatusVUZ);
+                
                 //MessageBox.Show("INSERT INTO document(name, typeDocument, number, dateDocument, dateStart, scan, \"description\") VALUES ('Приказ №" + mtbNumber.Text + " от " + mdtB.Text + "','Приказ', '" + mtbNumber.Text + "','" + strs + "','" + strb + "','" + mlScanName.Text + "')");
-                //MessageBox.Show("INSERT INTO student(Id_person, Id_document, Id_group, course, Id_statusStudent, Id_profiles) VALUES ('" + Idperson + "',(SELECT MAX(Id) FROM document),'" + Idgroup + "','" + coursee + "','1','" + Idprofiles + "')");
+               // MessageBox.Show("INSERT INTO student(Id_person, Id_document, Id_group, course, Id_statusStudent, Id_profiles) VALUES ('" + Idperson + "',(SELECT MAX(Id) FROM document),'" + mcbGroupIn.SelectedValue + "',(SELECT course FROM \"group\" WHERE Id = " + mcbGroupIn.SelectedValue + "),'2','" + Idprofiles + "')");
                 Close();
             }
             else MetroMessageBox.Show(this, "Заполните все поля данными", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);

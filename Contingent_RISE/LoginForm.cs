@@ -17,6 +17,7 @@ namespace Contingent_RISE
     {
         SqlConnection con;
         string server = "labit-1\\sqlexpress";
+        string DS = "193.108.39.226/DEVELOPMENT-SER";
         string BD = "RISO";
         
 
@@ -32,11 +33,13 @@ namespace Contingent_RISE
         {
             try
             {
+                //con = new SqlConnection("Data Source='10.250.253.3,1433';Network Library='DBMSSOCN'; Initial Catalog = 'RISO'; User ID = 'test'; Password = 'T_est';");
                 con = new SqlConnection("Server=" + server + ";Database=" + BD + ";uid=" + mtbLogin.Text + ";pwd=" + mtbPw.Text);
                 con.Open();
-               // MessageBox.Show("Успешное соединение!", "Соединение с БД", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //MessageBox.Show("Data Source=193.108.39.226,2309;Network Library=DBMSSOCN; Initial Catalog = 'RISO'; User ID = 'test'; Password = 'T_est';");
+                // MessageBox.Show("Успешное соединение!", "Соединение с БД", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //Data.connection = "Data Source='10.250.253.3,1433';Network Library='DBMSSOCN'; Initial Catalog = 'RISO'; User ID = 'test'; Password = 'T_est';";
                 Data.connection = "Server=" + server + ";Database=" + BD + ";uid=" + mtbLogin.Text + ";pwd=" + mtbPw.Text;
-
                 this.Close();
             }
             catch (Exception ex)
@@ -48,16 +51,6 @@ namespace Contingent_RISE
         private void LoginForm_Load(object sender, EventArgs e)
         {
             this.ControlBox = false;
-        }
-
-        private void LoginForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            
-        }
-
-        private void LoginForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            
         }
 
         private void mbClose_Click(object sender, EventArgs e)

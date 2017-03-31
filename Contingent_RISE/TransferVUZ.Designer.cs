@@ -31,9 +31,10 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.mlFIO = new MetroFramework.Controls.MetroLabel();
-            this.mlGroup = new MetroFramework.Controls.MetroLabel();
-            this.mlDirectionTraining = new MetroFramework.Controls.MetroLabel();
             this.mlVUZ = new MetroFramework.Controls.MetroLabel();
             this.mgVUZ = new MetroFramework.Controls.MetroGrid();
             this.mcbVUZ = new MetroFramework.Controls.MetroComboBox();
@@ -53,7 +54,10 @@
             this.metroLabel5 = new MetroFramework.Controls.MetroLabel();
             this.metroLabel6 = new MetroFramework.Controls.MetroLabel();
             this.mtbDescription = new MetroFramework.Controls.MetroTextBox();
+            this.mgTransV = new MetroFramework.Controls.MetroGrid();
+            this.metroLabel7 = new MetroFramework.Controls.MetroLabel();
             ((System.ComponentModel.ISupportInitialize)(this.mgVUZ)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mgTransV)).BeginInit();
             this.SuspendLayout();
             // 
             // mlFIO
@@ -65,28 +69,10 @@
             this.mlFIO.TabIndex = 0;
             this.mlFIO.Text = "ФИО:";
             // 
-            // mlGroup
-            // 
-            this.mlGroup.AutoSize = true;
-            this.mlGroup.Location = new System.Drawing.Point(29, 115);
-            this.mlGroup.Name = "mlGroup";
-            this.mlGroup.Size = new System.Drawing.Size(55, 19);
-            this.mlGroup.TabIndex = 1;
-            this.mlGroup.Text = "Группа:";
-            // 
-            // mlDirectionTraining
-            // 
-            this.mlDirectionTraining.AutoSize = true;
-            this.mlDirectionTraining.Location = new System.Drawing.Point(29, 145);
-            this.mlDirectionTraining.Name = "mlDirectionTraining";
-            this.mlDirectionTraining.Size = new System.Drawing.Size(169, 19);
-            this.mlDirectionTraining.TabIndex = 2;
-            this.mlDirectionTraining.Text = "Направление подготовки:";
-            // 
             // mlVUZ
             // 
             this.mlVUZ.AutoSize = true;
-            this.mlVUZ.Location = new System.Drawing.Point(29, 174);
+            this.mlVUZ.Location = new System.Drawing.Point(29, 280);
             this.mlVUZ.Name = "mlVUZ";
             this.mlVUZ.Size = new System.Drawing.Size(36, 19);
             this.mlVUZ.TabIndex = 3;
@@ -119,7 +105,7 @@
             this.mgVUZ.EnableHeadersVisualStyles = false;
             this.mgVUZ.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
             this.mgVUZ.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.mgVUZ.Location = new System.Drawing.Point(29, 297);
+            this.mgVUZ.Location = new System.Drawing.Point(29, 379);
             this.mgVUZ.Name = "mgVUZ";
             this.mgVUZ.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -141,7 +127,7 @@
             this.mcbVUZ.DisplayMember = "name";
             this.mcbVUZ.FormattingEnabled = true;
             this.mcbVUZ.ItemHeight = 23;
-            this.mcbVUZ.Location = new System.Drawing.Point(123, 171);
+            this.mcbVUZ.Location = new System.Drawing.Point(123, 277);
             this.mcbVUZ.Name = "mcbVUZ";
             this.mcbVUZ.Size = new System.Drawing.Size(278, 29);
             this.mcbVUZ.TabIndex = 5;
@@ -172,7 +158,7 @@
             // metroLabel1
             // 
             this.metroLabel1.AutoSize = true;
-            this.metroLabel1.Location = new System.Drawing.Point(29, 214);
+            this.metroLabel1.Location = new System.Drawing.Point(29, 320);
             this.metroLabel1.Name = "metroLabel1";
             this.metroLabel1.Size = new System.Drawing.Size(83, 19);
             this.metroLabel1.TabIndex = 8;
@@ -193,7 +179,7 @@
             this.mtbNumber.CustomButton.UseSelectable = true;
             this.mtbNumber.CustomButton.Visible = false;
             this.mtbNumber.Lines = new string[0];
-            this.mtbNumber.Location = new System.Drawing.Point(123, 213);
+            this.mtbNumber.Location = new System.Drawing.Point(123, 319);
             this.mtbNumber.MaxLength = 32767;
             this.mtbNumber.Name = "mtbNumber";
             this.mtbNumber.PasswordChar = '\0';
@@ -210,7 +196,7 @@
             // metroLabel2
             // 
             this.metroLabel2.AutoSize = true;
-            this.metroLabel2.Location = new System.Drawing.Point(407, 174);
+            this.metroLabel2.Location = new System.Drawing.Point(407, 280);
             this.metroLabel2.Name = "metroLabel2";
             this.metroLabel2.Size = new System.Drawing.Size(119, 19);
             this.metroLabel2.TabIndex = 10;
@@ -219,7 +205,7 @@
             // metroLabel3
             // 
             this.metroLabel3.AutoSize = true;
-            this.metroLabel3.Location = new System.Drawing.Point(407, 214);
+            this.metroLabel3.Location = new System.Drawing.Point(407, 320);
             this.metroLabel3.Name = "metroLabel3";
             this.metroLabel3.Size = new System.Drawing.Size(113, 19);
             this.metroLabel3.TabIndex = 10;
@@ -228,7 +214,7 @@
             // metroLabel4
             // 
             this.metroLabel4.AutoSize = true;
-            this.metroLabel4.Location = new System.Drawing.Point(29, 253);
+            this.metroLabel4.Location = new System.Drawing.Point(30, 352);
             this.metroLabel4.Name = "metroLabel4";
             this.metroLabel4.Size = new System.Drawing.Size(42, 19);
             this.metroLabel4.TabIndex = 11;
@@ -236,7 +222,7 @@
             // 
             // mdtB
             // 
-            this.mdtB.Location = new System.Drawing.Point(540, 171);
+            this.mdtB.Location = new System.Drawing.Point(540, 277);
             this.mdtB.MinimumSize = new System.Drawing.Size(0, 29);
             this.mdtB.Name = "mdtB";
             this.mdtB.Size = new System.Drawing.Size(227, 29);
@@ -244,7 +230,7 @@
             // 
             // mdtSign
             // 
-            this.mdtSign.Location = new System.Drawing.Point(540, 210);
+            this.mdtSign.Location = new System.Drawing.Point(540, 316);
             this.mdtSign.MinimumSize = new System.Drawing.Size(0, 29);
             this.mdtSign.Name = "mdtSign";
             this.mdtSign.Size = new System.Drawing.Size(227, 29);
@@ -252,7 +238,7 @@
             // 
             // mbOpen
             // 
-            this.mbOpen.Location = new System.Drawing.Point(162, 251);
+            this.mbOpen.Location = new System.Drawing.Point(163, 350);
             this.mbOpen.Name = "mbOpen";
             this.mbOpen.Size = new System.Drawing.Size(75, 23);
             this.mbOpen.TabIndex = 13;
@@ -263,7 +249,7 @@
             // mlScanName
             // 
             this.mlScanName.AutoSize = true;
-            this.mlScanName.Location = new System.Drawing.Point(261, 252);
+            this.mlScanName.Location = new System.Drawing.Point(262, 351);
             this.mlScanName.Name = "mlScanName";
             this.mlScanName.Size = new System.Drawing.Size(104, 19);
             this.mlScanName.TabIndex = 14;
@@ -278,7 +264,7 @@
             this.mcbGroupIn.DisplayMember = "name";
             this.mcbGroupIn.FormattingEnabled = true;
             this.mcbGroupIn.ItemHeight = 23;
-            this.mcbGroupIn.Location = new System.Drawing.Point(162, 470);
+            this.mcbGroupIn.Location = new System.Drawing.Point(162, 552);
             this.mcbGroupIn.Name = "mcbGroupIn";
             this.mcbGroupIn.Size = new System.Drawing.Size(239, 29);
             this.mcbGroupIn.TabIndex = 15;
@@ -288,7 +274,7 @@
             // metroLabel5
             // 
             this.metroLabel5.AutoSize = true;
-            this.metroLabel5.Location = new System.Drawing.Point(29, 472);
+            this.metroLabel5.Location = new System.Drawing.Point(29, 554);
             this.metroLabel5.Name = "metroLabel5";
             this.metroLabel5.Size = new System.Drawing.Size(118, 19);
             this.metroLabel5.TabIndex = 16;
@@ -297,7 +283,7 @@
             // metroLabel6
             // 
             this.metroLabel6.AutoSize = true;
-            this.metroLabel6.Location = new System.Drawing.Point(29, 521);
+            this.metroLabel6.Location = new System.Drawing.Point(29, 588);
             this.metroLabel6.Name = "metroLabel6";
             this.metroLabel6.Size = new System.Drawing.Size(62, 19);
             this.metroLabel6.TabIndex = 17;
@@ -309,16 +295,16 @@
             // 
             // 
             this.mtbDescription.CustomButton.Image = null;
-            this.mtbDescription.CustomButton.Location = new System.Drawing.Point(499, 1);
+            this.mtbDescription.CustomButton.Location = new System.Drawing.Point(567, 2);
             this.mtbDescription.CustomButton.Name = "";
-            this.mtbDescription.CustomButton.Size = new System.Drawing.Size(105, 105);
+            this.mtbDescription.CustomButton.Size = new System.Drawing.Size(35, 35);
             this.mtbDescription.CustomButton.Style = MetroFramework.MetroColorStyle.Blue;
             this.mtbDescription.CustomButton.TabIndex = 1;
             this.mtbDescription.CustomButton.Theme = MetroFramework.MetroThemeStyle.Light;
             this.mtbDescription.CustomButton.UseSelectable = true;
             this.mtbDescription.CustomButton.Visible = false;
             this.mtbDescription.Lines = new string[0];
-            this.mtbDescription.Location = new System.Drawing.Point(162, 521);
+            this.mtbDescription.Location = new System.Drawing.Point(162, 588);
             this.mtbDescription.MaxLength = 32767;
             this.mtbDescription.Multiline = true;
             this.mtbDescription.Name = "mtbDescription";
@@ -327,17 +313,71 @@
             this.mtbDescription.SelectedText = "";
             this.mtbDescription.SelectionLength = 0;
             this.mtbDescription.SelectionStart = 0;
-            this.mtbDescription.Size = new System.Drawing.Size(605, 107);
+            this.mtbDescription.Size = new System.Drawing.Size(605, 40);
             this.mtbDescription.TabIndex = 18;
             this.mtbDescription.UseSelectable = true;
             this.mtbDescription.WaterMarkColor = System.Drawing.Color.FromArgb(((int)(((byte)(109)))), ((int)(((byte)(109)))), ((int)(((byte)(109)))));
             this.mtbDescription.WaterMarkFont = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Pixel);
+            // 
+            // mgTransV
+            // 
+            this.mgTransV.AllowUserToResizeRows = false;
+            this.mgTransV.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.mgTransV.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.mgTransV.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.mgTransV.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.mgTransV.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.mgTransV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.mgTransV.DefaultCellStyle = dataGridViewCellStyle5;
+            this.mgTransV.EnableHeadersVisualStyles = false;
+            this.mgTransV.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            this.mgTransV.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.mgTransV.Location = new System.Drawing.Point(30, 136);
+            this.mgTransV.Name = "mgTransV";
+            this.mgTransV.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(174)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Pixel);
+            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(198)))), ((int)(((byte)(247)))));
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(17)))), ((int)(((byte)(17)))), ((int)(((byte)(17)))));
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.mgTransV.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            this.mgTransV.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.mgTransV.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.mgTransV.Size = new System.Drawing.Size(764, 134);
+            this.mgTransV.TabIndex = 19;
+            // 
+            // metroLabel7
+            // 
+            this.metroLabel7.AutoSize = true;
+            this.metroLabel7.Location = new System.Drawing.Point(30, 109);
+            this.metroLabel7.Name = "metroLabel7";
+            this.metroLabel7.Size = new System.Drawing.Size(134, 19);
+            this.metroLabel7.TabIndex = 20;
+            this.metroLabel7.Text = "Проходит обучение:";
             // 
             // TransferVUZ
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(817, 699);
+            this.Controls.Add(this.metroLabel7);
+            this.Controls.Add(this.mgTransV);
             this.Controls.Add(this.mtbDescription);
             this.Controls.Add(this.metroLabel6);
             this.Controls.Add(this.metroLabel5);
@@ -356,8 +396,6 @@
             this.Controls.Add(this.mcbVUZ);
             this.Controls.Add(this.mgVUZ);
             this.Controls.Add(this.mlVUZ);
-            this.Controls.Add(this.mlDirectionTraining);
-            this.Controls.Add(this.mlGroup);
             this.Controls.Add(this.mlFIO);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -365,6 +403,7 @@
             this.Resizable = false;
             this.Text = "Перевод в ВУЗ";
             ((System.ComponentModel.ISupportInitialize)(this.mgVUZ)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mgTransV)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -373,8 +412,6 @@
         #endregion
 
         private MetroFramework.Controls.MetroLabel mlFIO;
-        private MetroFramework.Controls.MetroLabel mlGroup;
-        private MetroFramework.Controls.MetroLabel mlDirectionTraining;
         private MetroFramework.Controls.MetroLabel mlVUZ;
         private MetroFramework.Controls.MetroGrid mgVUZ;
         private MetroFramework.Controls.MetroComboBox mcbVUZ;
@@ -394,5 +431,7 @@
         private MetroFramework.Controls.MetroLabel metroLabel5;
         private MetroFramework.Controls.MetroLabel metroLabel6;
         private MetroFramework.Controls.MetroTextBox mtbDescription;
+        private MetroFramework.Controls.MetroGrid mgTransV;
+        private MetroFramework.Controls.MetroLabel metroLabel7;
     }
 }

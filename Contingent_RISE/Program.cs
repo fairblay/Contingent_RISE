@@ -52,13 +52,22 @@ namespace Contingent_RISE
         {
             using (SqlConnection con = new SqlConnection(connection))
             {
-                con.Open();
-                SqlDataAdapter dat = new SqlDataAdapter("" + queryString, con);
-                DataTable dt = new DataTable();
-                dat.Fill(dt);
-                con.Close();
-                return dt;
+                try
+                {
+                    con.Open();
+                    SqlDataAdapter dat = new SqlDataAdapter("" + queryString, con);
+                    DataTable dt = new DataTable();
+                    dat.Fill(dt);
+                    con.Close();
+                    return dt;
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message); 
+                }
+               
             }
+            return null;
         }
 
     }
